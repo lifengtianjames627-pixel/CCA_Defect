@@ -1,0 +1,16 @@
+RCCA Workflow Package
+=====================
+
+This repository's new product code under `rcca_workflow/` and `gui/` is developed
+independently of the ICET-SQS GUI fork.
+
+`legacy_icet_sqs/` retains the previous Streamlit ICET-SQS application (MIT),
+originally by Miroslav Lebeda / IMPLANT Team (CTU Prague). See
+`legacy_icet_sqs/LICENSE`.
+
+`ex_scripts/` holds frozen method examples (SQS / Metropolis / vacancy / SIA)
+used as the scientific source of truth for porting. They are not the ICET-SQS
+GUI product.
+
+Any SQS helper code copied from the ICET-SQS lineage into this package must
+retain MIT attribution as required by that license.

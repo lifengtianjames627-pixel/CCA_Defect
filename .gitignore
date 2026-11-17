@@ -1,3 +1,15 @@
 __pycache__/
 *.py[cod]
+*.egg-info/
+.venv/
+venv/
 sqs_env/
+.pytest_cache/
+.mypy_cache/
+dist/
+build/
+*.data
+*.lammps
+log.lammps
+screen.log
+
