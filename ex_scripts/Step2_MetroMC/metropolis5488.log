@@ -1,0 +1,576 @@
+Room temperature 300 K | N=5488 | log_every=1000 | round=N attempts | min_rounds=10 stable_rounds=3 pe_tol=1.00 meV/atom
+POSCAR: /home/lammpsuser/HEA_Irr_ML_study/W-Ta-Cr-V/Metropolis_MC/MC_Metropolis_5488/poscar_out.vasp
+tabgap: /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.tabgap
+eam   : /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.eam.fs
+SKIP_RELAX=1 — reusing relaxed.data
+MC start with NPROCS=4 (forbidden ranks: [16]). Safety cap 200 rounds (1097600 attempts).
+chunk 1: types 1-2 (Cr-Ta) n_steps=1000 cum_att=0 -> 1000
+progress step=1000 pe/N=-10.792717 accept=17/1000 frac_interval=0.0170 round=0
+chunk 2: types 1-3 (Cr-V) n_steps=1000 cum_att=1000 -> 2000
+progress step=2000 pe/N=-10.795525 accept=324/2000 frac_interval=0.3070 round=0
+chunk 3: types 1-4 (Cr-W) n_steps=1000 cum_att=2000 -> 3000
+progress step=3000 pe/N=-10.796122 accept=401/3000 frac_interval=0.0770 round=0
+chunk 4: types 2-3 (Ta-V) n_steps=1000 cum_att=3000 -> 4000
+progress step=4000 pe/N=-10.796543 accept=462/4000 frac_interval=0.0610 round=0
+chunk 5: types 2-4 (Ta-W) n_steps=1000 cum_att=4000 -> 5000
+progress step=5000 pe/N=-10.798470 accept=672/5000 frac_interval=0.2100 round=0
+chunk 6: types 3-4 (V-W) n_steps=1000 cum_att=5000 -> 6000
+progress step=6000 pe/N=-10.799193 accept=867/6000 frac_interval=0.1950 round=1
+chunk 7: types 1-2 (Cr-Ta) n_steps=1000 cum_att=6000 -> 7000
+progress step=7000 pe/N=-10.799293 accept=875/7000 frac_interval=0.0080 round=1
+chunk 8: types 1-3 (Cr-V) n_steps=1000 cum_att=7000 -> 8000
+progress step=8000 pe/N=-10.801161 accept=1089/8000 frac_interval=0.2140 round=1
+chunk 9: types 1-4 (Cr-W) n_steps=1000 cum_att=8000 -> 9000
+progress step=9000 pe/N=-10.801924 accept=1165/9000 frac_interval=0.0760 round=1
+chunk 10: types 2-3 (Ta-V) n_steps=1000 cum_att=9000 -> 10000
+progress step=10000 pe/N=-10.802278 accept=1216/10000 frac_interval=0.0510 round=1
+chunk 11: types 2-4 (Ta-W) n_steps=1000 cum_att=10000 -> 11000
+progress step=11000 pe/N=-10.803577 accept=1371/11000 frac_interval=0.1550 round=2
+chunk 12: types 3-4 (V-W) n_steps=1000 cum_att=11000 -> 12000
+progress step=12000 pe/N=-10.804325 accept=1554/12000 frac_interval=0.1830 round=2
+chunk 13: types 1-2 (Cr-Ta) n_steps=1000 cum_att=12000 -> 13000
+progress step=13000 pe/N=-10.804393 accept=1558/13000 frac_interval=0.0040 round=2
+chunk 14: types 1-3 (Cr-V) n_steps=1000 cum_att=13000 -> 14000
+progress step=14000 pe/N=-10.805974 accept=1738/14000 frac_interval=0.1800 round=2
+chunk 15: types 1-4 (Cr-W) n_steps=1000 cum_att=14000 -> 15000
+progress step=15000 pe/N=-10.806337 accept=1793/15000 frac_interval=0.0550 round=2
+chunk 16: types 2-3 (Ta-V) n_steps=1000 cum_att=15000 -> 16000
+progress step=16000 pe/N=-10.806747 accept=1835/16000 frac_interval=0.0420 round=2
+chunk 17: types 2-4 (Ta-W) n_steps=1000 cum_att=16000 -> 17000
+progress step=17000 pe/N=-10.807473 accept=1968/17000 frac_interval=0.1330 round=3
+chunk 18: types 3-4 (V-W) n_steps=1000 cum_att=17000 -> 18000
+progress step=18000 pe/N=-10.808182 accept=2135/18000 frac_interval=0.1670 round=3
+chunk 19: types 1-2 (Cr-Ta) n_steps=1000 cum_att=18000 -> 19000
+progress step=19000 pe/N=-10.808229 accept=2138/19000 frac_interval=0.0030 round=3
+chunk 20: types 1-3 (Cr-V) n_steps=1000 cum_att=19000 -> 20000
+progress step=20000 pe/N=-10.809364 accept=2294/20000 frac_interval=0.1560 round=3
+chunk 21: types 1-4 (Cr-W) n_steps=1000 cum_att=20000 -> 21000
+progress step=21000 pe/N=-10.809663 accept=2336/21000 frac_interval=0.0420 round=3
+chunk 22: types 2-3 (Ta-V) n_steps=1000 cum_att=21000 -> 22000
+progress step=22000 pe/N=-10.809931 accept=2370/22000 frac_interval=0.0340 round=4
+chunk 23: types 2-4 (Ta-W) n_steps=1000 cum_att=22000 -> 23000
+progress step=23000 pe/N=-10.810598 accept=2494/23000 frac_interval=0.1240 round=4
+chunk 24: types 3-4 (V-W) n_steps=1000 cum_att=23000 -> 24000
+progress step=24000 pe/N=-10.811014 accept=2627/24000 frac_interval=0.1330 round=4
+chunk 25: types 1-2 (Cr-Ta) n_steps=1000 cum_att=24000 -> 25000
+progress step=25000 pe/N=-10.811030 accept=2629/25000 frac_interval=0.0020 round=4
+chunk 26: types 1-3 (Cr-V) n_steps=1000 cum_att=25000 -> 26000
+progress step=26000 pe/N=-10.811826 accept=2743/26000 frac_interval=0.1140 round=4
+chunk 27: types 1-4 (Cr-W) n_steps=1000 cum_att=26000 -> 27000
+progress step=27000 pe/N=-10.812008 accept=2771/27000 frac_interval=0.0280 round=4
+chunk 28: types 2-3 (Ta-V) n_steps=1000 cum_att=27000 -> 28000
+progress step=28000 pe/N=-10.812098 accept=2798/28000 frac_interval=0.0270 round=5
+chunk 29: types 2-4 (Ta-W) n_steps=1000 cum_att=28000 -> 29000
+progress step=29000 pe/N=-10.812828 accept=2896/29000 frac_interval=0.0980 round=5
+chunk 30: types 3-4 (V-W) n_steps=1000 cum_att=29000 -> 30000
+progress step=30000 pe/N=-10.813425 accept=3034/30000 frac_interval=0.1380 round=5
+chunk 31: types 1-2 (Cr-Ta) n_steps=1000 cum_att=30000 -> 31000
+progress step=31000 pe/N=-10.813425 accept=3034/31000 frac_interval=0.0000 round=5
+chunk 32: types 1-3 (Cr-V) n_steps=1000 cum_att=31000 -> 32000
+progress step=32000 pe/N=-10.814001 accept=3149/32000 frac_interval=0.1150 round=5
+chunk 33: types 1-4 (Cr-W) n_steps=1000 cum_att=32000 -> 33000
+progress step=33000 pe/N=-10.814128 accept=3169/33000 frac_interval=0.0200 round=6
+chunk 34: types 2-3 (Ta-V) n_steps=1000 cum_att=33000 -> 34000
+progress step=34000 pe/N=-10.814237 accept=3195/34000 frac_interval=0.0260 round=6
+chunk 35: types 2-4 (Ta-W) n_steps=1000 cum_att=34000 -> 35000
+progress step=35000 pe/N=-10.814693 accept=3307/35000 frac_interval=0.1120 round=6
+chunk 36: types 3-4 (V-W) n_steps=1000 cum_att=35000 -> 36000
+progress step=36000 pe/N=-10.815067 accept=3445/36000 frac_interval=0.1380 round=6
+chunk 37: types 1-2 (Cr-Ta) n_steps=1000 cum_att=36000 -> 37000
+progress step=37000 pe/N=-10.815071 accept=3446/37000 frac_interval=0.0010 round=6
+chunk 38: types 1-3 (Cr-V) n_steps=1000 cum_att=37000 -> 38000
+progress step=38000 pe/N=-10.815749 accept=3560/38000 frac_interval=0.1140 round=6
+chunk 39: types 1-4 (Cr-W) n_steps=1000 cum_att=38000 -> 39000
+progress step=39000 pe/N=-10.815845 accept=3582/39000 frac_interval=0.0220 round=7
+chunk 40: types 2-3 (Ta-V) n_steps=1000 cum_att=39000 -> 40000
+progress step=40000 pe/N=-10.816014 accept=3598/40000 frac_interval=0.0160 round=7
+chunk 41: types 2-4 (Ta-W) n_steps=1000 cum_att=40000 -> 41000
+progress step=41000 pe/N=-10.816348 accept=3696/41000 frac_interval=0.0980 round=7
+chunk 42: types 3-4 (V-W) n_steps=1000 cum_att=41000 -> 42000
+progress step=42000 pe/N=-10.816524 accept=3820/42000 frac_interval=0.1240 round=7
+chunk 43: types 1-2 (Cr-Ta) n_steps=1000 cum_att=42000 -> 43000
+progress step=43000 pe/N=-10.816528 accept=3821/43000 frac_interval=0.0010 round=7
+chunk 44: types 1-3 (Cr-V) n_steps=1000 cum_att=43000 -> 44000
+progress step=44000 pe/N=-10.817064 accept=3938/44000 frac_interval=0.1170 round=8
+chunk 45: types 1-4 (Cr-W) n_steps=1000 cum_att=44000 -> 45000
+progress step=45000 pe/N=-10.817140 accept=3953/45000 frac_interval=0.0150 round=8
+chunk 46: types 2-3 (Ta-V) n_steps=1000 cum_att=45000 -> 46000
+progress step=46000 pe/N=-10.817221 accept=3966/46000 frac_interval=0.0130 round=8
+chunk 47: types 2-4 (Ta-W) n_steps=1000 cum_att=46000 -> 47000
+progress step=47000 pe/N=-10.817597 accept=4060/47000 frac_interval=0.0940 round=8
+chunk 48: types 3-4 (V-W) n_steps=1000 cum_att=47000 -> 48000
+progress step=48000 pe/N=-10.818038 accept=4182/48000 frac_interval=0.1220 round=8
+chunk 49: types 1-2 (Cr-Ta) n_steps=1000 cum_att=48000 -> 49000
+progress step=49000 pe/N=-10.818038 accept=4182/49000 frac_interval=0.0000 round=8
+chunk 50: types 1-3 (Cr-V) n_steps=1000 cum_att=49000 -> 50000
+progress step=50000 pe/N=-10.818549 accept=4273/50000 frac_interval=0.0910 round=9
+chunk 51: types 1-4 (Cr-W) n_steps=1000 cum_att=50000 -> 51000
+progress step=51000 pe/N=-10.818634 accept=4282/51000 frac_interval=0.0090 round=9
+chunk 52: types 2-3 (Ta-V) n_steps=1000 cum_att=51000 -> 52000
+progress step=52000 pe/N=-10.818651 accept=4298/52000 frac_interval=0.0160 round=9
+chunk 53: types 2-4 (Ta-W) n_steps=1000 cum_att=52000 -> 53000
+progress step=53000 pe/N=-10.818892 accept=4374/53000 frac_interval=0.0760 round=9
+chunk 54: types 3-4 (V-W) n_steps=1000 cum_att=53000 -> 54000
+progress step=54000 pe/N=-10.819132 accept=4498/54000 frac_interval=0.1240 round=9
+chunk 55: types 1-2 (Cr-Ta) n_steps=1000 cum_att=54000 -> 55000
+progress step=55000 pe/N=-10.819146 accept=4499/55000 frac_interval=0.0010 round=10
+chunk 56: types 1-3 (Cr-V) n_steps=1000 cum_att=55000 -> 56000
+progress step=56000 pe/N=-10.819586 accept=4591/56000 frac_interval=0.0920 round=10
+chunk 57: types 1-4 (Cr-W) n_steps=1000 cum_att=56000 -> 57000
+progress step=57000 pe/N=-10.819620 accept=4595/57000 frac_interval=0.0040 round=10
+chunk 58: types 2-3 (Ta-V) n_steps=1000 cum_att=57000 -> 58000
+progress step=58000 pe/N=-10.819706 accept=4605/58000 frac_interval=0.0100 round=10
+chunk 59: types 2-4 (Ta-W) n_steps=1000 cum_att=58000 -> 59000
+progress step=59000 pe/N=-10.820158 accept=4684/59000 frac_interval=0.0790 round=10
+chunk 60: types 3-4 (V-W) n_steps=1000 cum_att=59000 -> 60000
+progress step=60000 pe/N=-10.820390 accept=4821/60000 frac_interval=0.1370 round=10
+chunk 61: types 1-2 (Cr-Ta) n_steps=1000 cum_att=60000 -> 61000
+progress step=61000 pe/N=-10.820390 accept=4821/61000 frac_interval=0.0000 round=11
+chunk 62: types 1-3 (Cr-V) n_steps=1000 cum_att=61000 -> 62000
+progress step=62000 pe/N=-10.820607 accept=4899/62000 frac_interval=0.0780 round=11
+chunk 63: types 1-4 (Cr-W) n_steps=1000 cum_att=62000 -> 63000
+progress step=63000 pe/N=-10.820606 accept=4903/63000 frac_interval=0.0040 round=11
+chunk 64: types 2-3 (Ta-V) n_steps=1000 cum_att=63000 -> 64000
+progress step=64000 pe/N=-10.820707 accept=4916/64000 frac_interval=0.0130 round=11
+chunk 65: types 2-4 (Ta-W) n_steps=1000 cum_att=64000 -> 65000
+progress step=65000 pe/N=-10.821049 accept=4995/65000 frac_interval=0.0790 round=11
+chunk 66: types 3-4 (V-W) n_steps=1000 cum_att=65000 -> 66000
+progress step=66000 pe/N=-10.821175 accept=5111/66000 frac_interval=0.1160 round=12
+chunk 67: types 1-2 (Cr-Ta) n_steps=1000 cum_att=66000 -> 67000
+progress step=67000 pe/N=-10.821175 accept=5111/67000 frac_interval=0.0000 round=12
+chunk 68: types 1-3 (Cr-V) n_steps=1000 cum_att=67000 -> 68000
+progress step=68000 pe/N=-10.821430 accept=5186/68000 frac_interval=0.0750 round=12
+chunk 69: types 1-4 (Cr-W) n_steps=1000 cum_att=68000 -> 69000
+progress step=69000 pe/N=-10.821470 accept=5200/69000 frac_interval=0.0140 round=12
+chunk 70: types 2-3 (Ta-V) n_steps=1000 cum_att=69000 -> 70000
+progress step=70000 pe/N=-10.821476 accept=5211/70000 frac_interval=0.0110 round=12
+chunk 71: types 2-4 (Ta-W) n_steps=1000 cum_att=70000 -> 71000
+progress step=71000 pe/N=-10.821838 accept=5290/71000 frac_interval=0.0790 round=12
+chunk 72: types 3-4 (V-W) n_steps=1000 cum_att=71000 -> 72000
+progress step=72000 pe/N=-10.821905 accept=5409/72000 frac_interval=0.1190 round=13
+chunk 73: types 1-2 (Cr-Ta) n_steps=1000 cum_att=72000 -> 73000
+progress step=73000 pe/N=-10.821905 accept=5409/73000 frac_interval=0.0000 round=13
+chunk 74: types 1-3 (Cr-V) n_steps=1000 cum_att=73000 -> 74000
+progress step=74000 pe/N=-10.822272 accept=5486/74000 frac_interval=0.0770 round=13
+chunk 75: types 1-4 (Cr-W) n_steps=1000 cum_att=74000 -> 75000
+progress step=75000 pe/N=-10.822303 accept=5493/75000 frac_interval=0.0070 round=13
+chunk 76: types 2-3 (Ta-V) n_steps=1000 cum_att=75000 -> 76000
+progress step=76000 pe/N=-10.822286 accept=5497/76000 frac_interval=0.0040 round=13
+chunk 77: types 2-4 (Ta-W) n_steps=1000 cum_att=76000 -> 77000
+progress step=77000 pe/N=-10.822581 accept=5556/77000 frac_interval=0.0590 round=14
+chunk 78: types 3-4 (V-W) n_steps=1000 cum_att=77000 -> 78000
+progress step=78000 pe/N=-10.822674 accept=5676/78000 frac_interval=0.1200 round=14
+chunk 79: types 1-2 (Cr-Ta) n_steps=1000 cum_att=78000 -> 79000
+progress step=79000 pe/N=-10.822674 accept=5676/79000 frac_interval=0.0000 round=14
+chunk 80: types 1-3 (Cr-V) n_steps=1000 cum_att=79000 -> 80000
+progress step=80000 pe/N=-10.822743 accept=5737/80000 frac_interval=0.0610 round=14
+chunk 81: types 1-4 (Cr-W) n_steps=1000 cum_att=80000 -> 81000
+progress step=81000 pe/N=-10.822763 accept=5745/81000 frac_interval=0.0080 round=14
+chunk 82: types 2-3 (Ta-V) n_steps=1000 cum_att=81000 -> 82000
+progress step=82000 pe/N=-10.822814 accept=5754/82000 frac_interval=0.0090 round=14
+chunk 83: types 2-4 (Ta-W) n_steps=1000 cum_att=82000 -> 83000
+progress step=83000 pe/N=-10.822902 accept=5825/83000 frac_interval=0.0710 round=15
+chunk 84: types 3-4 (V-W) n_steps=1000 cum_att=83000 -> 84000
+progress step=84000 pe/N=-10.823125 accept=5949/84000 frac_interval=0.1240 round=15
+chunk 85: types 1-2 (Cr-Ta) n_steps=1000 cum_att=84000 -> 85000
+progress step=85000 pe/N=-10.823125 accept=5949/85000 frac_interval=0.0000 round=15
+chunk 86: types 1-3 (Cr-V) n_steps=1000 cum_att=85000 -> 86000
+progress step=86000 pe/N=-10.823342 accept=6021/86000 frac_interval=0.0720 round=15
+chunk 87: types 1-4 (Cr-W) n_steps=1000 cum_att=86000 -> 87000
+progress step=87000 pe/N=-10.823323 accept=6027/87000 frac_interval=0.0060 round=15
+chunk 88: types 2-3 (Ta-V) n_steps=1000 cum_att=87000 -> 88000
+progress step=88000 pe/N=-10.823298 accept=6033/88000 frac_interval=0.0060 round=16
+chunk 89: types 2-4 (Ta-W) n_steps=1000 cum_att=88000 -> 89000
+progress step=89000 pe/N=-10.823367 accept=6088/89000 frac_interval=0.0550 round=16
+chunk 90: types 3-4 (V-W) n_steps=1000 cum_att=89000 -> 90000
+progress step=90000 pe/N=-10.823464 accept=6197/90000 frac_interval=0.1090 round=16
+chunk 91: types 1-2 (Cr-Ta) n_steps=1000 cum_att=90000 -> 91000
+progress step=91000 pe/N=-10.823464 accept=6197/91000 frac_interval=0.0000 round=16
+chunk 92: types 1-3 (Cr-V) n_steps=1000 cum_att=91000 -> 92000
+progress step=92000 pe/N=-10.823705 accept=6262/92000 frac_interval=0.0650 round=16
+chunk 93: types 1-4 (Cr-W) n_steps=1000 cum_att=92000 -> 93000
+progress step=93000 pe/N=-10.823717 accept=6271/93000 frac_interval=0.0090 round=16
+chunk 94: types 2-3 (Ta-V) n_steps=1000 cum_att=93000 -> 94000
+progress step=94000 pe/N=-10.823735 accept=6275/94000 frac_interval=0.0040 round=17
+chunk 95: types 2-4 (Ta-W) n_steps=1000 cum_att=94000 -> 95000
+progress step=95000 pe/N=-10.823919 accept=6333/95000 frac_interval=0.0580 round=17
+chunk 96: types 3-4 (V-W) n_steps=1000 cum_att=95000 -> 96000
+progress step=96000 pe/N=-10.824166 accept=6442/96000 frac_interval=0.1090 round=17
+chunk 97: types 1-2 (Cr-Ta) n_steps=1000 cum_att=96000 -> 97000
+progress step=97000 pe/N=-10.824166 accept=6442/97000 frac_interval=0.0000 round=17
+chunk 98: types 1-3 (Cr-V) n_steps=1000 cum_att=97000 -> 98000
+progress step=98000 pe/N=-10.824165 accept=6499/98000 frac_interval=0.0570 round=17
+chunk 99: types 1-4 (Cr-W) n_steps=1000 cum_att=98000 -> 99000
+progress step=99000 pe/N=-10.824164 accept=6502/99000 frac_interval=0.0030 round=18
+chunk 100: types 2-3 (Ta-V) n_steps=1000 cum_att=99000 -> 100000
+progress step=100000 pe/N=-10.824232 accept=6508/100000 frac_interval=0.0060 round=18
+chunk 101: types 2-4 (Ta-W) n_steps=1000 cum_att=100000 -> 101000
+progress step=101000 pe/N=-10.824484 accept=6564/101000 frac_interval=0.0560 round=18
+chunk 102: types 3-4 (V-W) n_steps=1000 cum_att=101000 -> 102000
+progress step=102000 pe/N=-10.824676 accept=6669/102000 frac_interval=0.1050 round=18
+chunk 103: types 1-2 (Cr-Ta) n_steps=1000 cum_att=102000 -> 103000
+progress step=103000 pe/N=-10.824676 accept=6669/103000 frac_interval=0.0000 round=18
+chunk 104: types 1-3 (Cr-V) n_steps=1000 cum_att=103000 -> 104000
+progress step=104000 pe/N=-10.824705 accept=6734/104000 frac_interval=0.0650 round=18
+chunk 105: types 1-4 (Cr-W) n_steps=1000 cum_att=104000 -> 105000
+progress step=105000 pe/N=-10.824715 accept=6738/105000 frac_interval=0.0040 round=19
+chunk 106: types 2-3 (Ta-V) n_steps=1000 cum_att=105000 -> 106000
+progress step=106000 pe/N=-10.824728 accept=6743/106000 frac_interval=0.0050 round=19
+chunk 107: types 2-4 (Ta-W) n_steps=1000 cum_att=106000 -> 107000
+progress step=107000 pe/N=-10.824900 accept=6793/107000 frac_interval=0.0500 round=19
+chunk 108: types 3-4 (V-W) n_steps=1000 cum_att=107000 -> 108000
+progress step=108000 pe/N=-10.824882 accept=6901/108000 frac_interval=0.1080 round=19
+chunk 109: types 1-2 (Cr-Ta) n_steps=1000 cum_att=108000 -> 109000
+progress step=109000 pe/N=-10.824882 accept=6901/109000 frac_interval=0.0000 round=19
+chunk 110: types 1-3 (Cr-V) n_steps=1000 cum_att=109000 -> 110000
+progress step=110000 pe/N=-10.825020 accept=6948/110000 frac_interval=0.0470 round=20
+chunk 111: types 1-4 (Cr-W) n_steps=1000 cum_att=110000 -> 111000
+progress step=111000 pe/N=-10.824982 accept=6953/111000 frac_interval=0.0050 round=20
+chunk 112: types 2-3 (Ta-V) n_steps=1000 cum_att=111000 -> 112000
+progress step=112000 pe/N=-10.824991 accept=6962/112000 frac_interval=0.0090 round=20
+chunk 113: types 2-4 (Ta-W) n_steps=1000 cum_att=112000 -> 113000
+progress step=113000 pe/N=-10.825058 accept=7001/113000 frac_interval=0.0390 round=20
+chunk 114: types 3-4 (V-W) n_steps=1000 cum_att=113000 -> 114000
+[vmi3286411][[19520,1],1][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(17) failed: Connection reset by peer (104)
+progress step=114000 pe/N=-10.825220 accept=7098/114000 frac_interval=0.0970 round=20
+chunk 115: types 1-2 (Cr-Ta) n_steps=1000 cum_att=114000 -> 115000
+progress step=115000 pe/N=-10.825220 accept=7098/115000 frac_interval=0.0000 round=20
+chunk 116: types 1-3 (Cr-V) n_steps=1000 cum_att=115000 -> 116000
+progress step=116000 pe/N=-10.825184 accept=7151/116000 frac_interval=0.0530 round=21
+chunk 117: types 1-4 (Cr-W) n_steps=1000 cum_att=116000 -> 117000
+progress step=117000 pe/N=-10.825177 accept=7156/117000 frac_interval=0.0050 round=21
+chunk 118: types 2-3 (Ta-V) n_steps=1000 cum_att=117000 -> 118000
+progress step=118000 pe/N=-10.825170 accept=7162/118000 frac_interval=0.0060 round=21
+chunk 119: types 2-4 (Ta-W) n_steps=1000 cum_att=118000 -> 119000
+progress step=119000 pe/N=-10.825194 accept=7202/119000 frac_interval=0.0400 round=21
+chunk 120: types 3-4 (V-W) n_steps=1000 cum_att=119000 -> 120000
+progress step=120000 pe/N=-10.825096 accept=7317/120000 frac_interval=0.1150 round=21
+chunk 121: types 1-2 (Cr-Ta) n_steps=1000 cum_att=120000 -> 121000
+progress step=121000 pe/N=-10.825096 accept=7317/121000 frac_interval=0.0000 round=22
+chunk 122: types 1-3 (Cr-V) n_steps=1000 cum_att=121000 -> 122000
+progress step=122000 pe/N=-10.825229 accept=7359/122000 frac_interval=0.0420 round=22
+chunk 123: types 1-4 (Cr-W) n_steps=1000 cum_att=122000 -> 123000
+progress step=123000 pe/N=-10.825260 accept=7363/123000 frac_interval=0.0040 round=22
+chunk 124: types 2-3 (Ta-V) n_steps=1000 cum_att=123000 -> 124000
+progress step=124000 pe/N=-10.825271 accept=7365/124000 frac_interval=0.0020 round=22
+chunk 125: types 2-4 (Ta-W) n_steps=1000 cum_att=124000 -> 125000
+progress step=125000 pe/N=-10.825411 accept=7414/125000 frac_interval=0.0490 round=22
+chunk 126: types 3-4 (V-W) n_steps=1000 cum_att=125000 -> 126000
+progress step=126000 pe/N=-10.825685 accept=7519/126000 frac_interval=0.1050 round=22
+chunk 127: types 1-2 (Cr-Ta) n_steps=1000 cum_att=126000 -> 127000
+progress step=127000 pe/N=-10.825685 accept=7519/127000 frac_interval=0.0000 round=23
+chunk 128: types 1-3 (Cr-V) n_steps=1000 cum_att=127000 -> 128000
+progress step=128000 pe/N=-10.825757 accept=7581/128000 frac_interval=0.0620 round=23
+chunk 129: types 1-4 (Cr-W) n_steps=1000 cum_att=128000 -> 129000
+progress step=129000 pe/N=-10.825755 accept=7587/129000 frac_interval=0.0060 round=23
+chunk 130: types 2-3 (Ta-V) n_steps=1000 cum_att=129000 -> 130000
+progress step=130000 pe/N=-10.825753 accept=7590/130000 frac_interval=0.0030 round=23
+chunk 131: types 2-4 (Ta-W) n_steps=1000 cum_att=130000 -> 131000
+progress step=131000 pe/N=-10.825784 accept=7630/131000 frac_interval=0.0400 round=23
+chunk 132: types 3-4 (V-W) n_steps=1000 cum_att=131000 -> 132000
+progress step=132000 pe/N=-10.825841 accept=7729/132000 frac_interval=0.0990 round=24
+chunk 133: types 1-2 (Cr-Ta) n_steps=1000 cum_att=132000 -> 133000
+progress step=133000 pe/N=-10.825841 accept=7729/133000 frac_interval=0.0000 round=24
+chunk 134: types 1-3 (Cr-V) n_steps=1000 cum_att=133000 -> 134000
+progress step=134000 pe/N=-10.825892 accept=7786/134000 frac_interval=0.0570 round=24
+chunk 135: types 1-4 (Cr-W) n_steps=1000 cum_att=134000 -> 135000
+[vmi3286411][[16798,1],1][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(17) failed: Connection reset by peer (104)
+progress step=135000 pe/N=-10.825940 accept=7790/135000 frac_interval=0.0040 round=24
+chunk 136: types 2-3 (Ta-V) n_steps=1000 cum_att=135000 -> 136000
+[vmi3286411][[16964,1],0][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(19) failed: Connection reset by peer (104)
+[vmi3286411][[16964,1],0][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(19) failed: Connection reset by peer (104)
+[vmi3286411][[16964,1],0][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(19) failed: Connection reset by peer (104)
+progress step=136000 pe/N=-10.825975 accept=7794/136000 frac_interval=0.0040 round=24
+chunk 137: types 2-4 (Ta-W) n_steps=1000 cum_att=136000 -> 137000
+progress step=137000 pe/N=-10.826096 accept=7852/137000 frac_interval=0.0580 round=24
+chunk 138: types 3-4 (V-W) n_steps=1000 cum_att=137000 -> 138000
+progress step=138000 pe/N=-10.826195 accept=7945/138000 frac_interval=0.0930 round=25
+chunk 139: types 1-2 (Cr-Ta) n_steps=1000 cum_att=138000 -> 139000
+progress step=139000 pe/N=-10.826195 accept=7945/139000 frac_interval=0.0000 round=25
+chunk 140: types 1-3 (Cr-V) n_steps=1000 cum_att=139000 -> 140000
+progress step=140000 pe/N=-10.826362 accept=8001/140000 frac_interval=0.0560 round=25
+chunk 141: types 1-4 (Cr-W) n_steps=1000 cum_att=140000 -> 141000
+[vmi3286411][[23985,1],0][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(19) failed: Connection reset by peer (104)
+progress step=141000 pe/N=-10.826403 accept=8008/141000 frac_interval=0.0070 round=25
+chunk 142: types 2-3 (Ta-V) n_steps=1000 cum_att=141000 -> 142000
+progress step=142000 pe/N=-10.826382 accept=8012/142000 frac_interval=0.0040 round=25
+chunk 143: types 2-4 (Ta-W) n_steps=1000 cum_att=142000 -> 143000
+progress step=143000 pe/N=-10.826414 accept=8046/143000 frac_interval=0.0340 round=26
+chunk 144: types 3-4 (V-W) n_steps=1000 cum_att=143000 -> 144000
+progress step=144000 pe/N=-10.826316 accept=8157/144000 frac_interval=0.1110 round=26
+chunk 145: types 1-2 (Cr-Ta) n_steps=1000 cum_att=144000 -> 145000
+progress step=145000 pe/N=-10.826316 accept=8157/145000 frac_interval=0.0000 round=26
+chunk 146: types 1-3 (Cr-V) n_steps=1000 cum_att=145000 -> 146000
+progress step=146000 pe/N=-10.826369 accept=8204/146000 frac_interval=0.0470 round=26
+chunk 147: types 1-4 (Cr-W) n_steps=1000 cum_att=146000 -> 147000
+progress step=147000 pe/N=-10.826369 accept=8204/147000 frac_interval=0.0000 round=26
+chunk 148: types 2-3 (Ta-V) n_steps=1000 cum_att=147000 -> 148000
+progress step=148000 pe/N=-10.826383 accept=8210/148000 frac_interval=0.0060 round=26
+chunk 149: types 2-4 (Ta-W) n_steps=1000 cum_att=148000 -> 149000
+progress step=149000 pe/N=-10.826427 accept=8259/149000 frac_interval=0.0490 round=27
+chunk 150: types 3-4 (V-W) n_steps=1000 cum_att=149000 -> 150000
+progress step=150000 pe/N=-10.826362 accept=8341/150000 frac_interval=0.0820 round=27
+chunk 151: types 1-2 (Cr-Ta) n_steps=1000 cum_att=150000 -> 151000
+progress step=151000 pe/N=-10.826362 accept=8341/151000 frac_interval=0.0000 round=27
+chunk 152: types 1-3 (Cr-V) n_steps=1000 cum_att=151000 -> 152000
+progress step=152000 pe/N=-10.826473 accept=8384/152000 frac_interval=0.0430 round=27
+chunk 153: types 1-4 (Cr-W) n_steps=1000 cum_att=152000 -> 153000
+progress step=153000 pe/N=-10.826455 accept=8387/153000 frac_interval=0.0030 round=27
+chunk 154: types 2-3 (Ta-V) n_steps=1000 cum_att=153000 -> 154000
+progress step=154000 pe/N=-10.826462 accept=8389/154000 frac_interval=0.0020 round=28
+chunk 155: types 2-4 (Ta-W) n_steps=1000 cum_att=154000 -> 155000
+progress step=155000 pe/N=-10.826551 accept=8434/155000 frac_interval=0.0450 round=28
+chunk 156: types 3-4 (V-W) n_steps=1000 cum_att=155000 -> 156000
+progress step=156000 pe/N=-10.826649 accept=8543/156000 frac_interval=0.1090 round=28
+chunk 157: types 1-2 (Cr-Ta) n_steps=1000 cum_att=156000 -> 157000
+progress step=157000 pe/N=-10.826649 accept=8543/157000 frac_interval=0.0000 round=28
+chunk 158: types 1-3 (Cr-V) n_steps=1000 cum_att=157000 -> 158000
+progress step=158000 pe/N=-10.826723 accept=8588/158000 frac_interval=0.0450 round=28
+chunk 159: types 1-4 (Cr-W) n_steps=1000 cum_att=158000 -> 159000
+progress step=159000 pe/N=-10.826751 accept=8592/159000 frac_interval=0.0040 round=28
+chunk 160: types 2-3 (Ta-V) n_steps=1000 cum_att=159000 -> 160000
+progress step=160000 pe/N=-10.826751 accept=8593/160000 frac_interval=0.0010 round=29
+chunk 161: types 2-4 (Ta-W) n_steps=1000 cum_att=160000 -> 161000
+progress step=161000 pe/N=-10.826844 accept=8640/161000 frac_interval=0.0470 round=29
+chunk 162: types 3-4 (V-W) n_steps=1000 cum_att=161000 -> 162000
+progress step=162000 pe/N=-10.826788 accept=8750/162000 frac_interval=0.1100 round=29
+chunk 163: types 1-2 (Cr-Ta) n_steps=1000 cum_att=162000 -> 163000
+progress step=163000 pe/N=-10.826788 accept=8750/163000 frac_interval=0.0000 round=29
+chunk 164: types 1-3 (Cr-V) n_steps=1000 cum_att=163000 -> 164000
+progress step=164000 pe/N=-10.826828 accept=8788/164000 frac_interval=0.0380 round=29
+chunk 165: types 1-4 (Cr-W) n_steps=1000 cum_att=164000 -> 165000
+progress step=165000 pe/N=-10.826801 accept=8791/165000 frac_interval=0.0030 round=30
+chunk 166: types 2-3 (Ta-V) n_steps=1000 cum_att=165000 -> 166000
+progress step=166000 pe/N=-10.826809 accept=8796/166000 frac_interval=0.0050 round=30
+chunk 167: types 2-4 (Ta-W) n_steps=1000 cum_att=166000 -> 167000
+progress step=167000 pe/N=-10.826844 accept=8824/167000 frac_interval=0.0280 round=30
+chunk 168: types 3-4 (V-W) n_steps=1000 cum_att=167000 -> 168000
+progress step=168000 pe/N=-10.826944 accept=8930/168000 frac_interval=0.1060 round=30
+chunk 169: types 1-2 (Cr-Ta) n_steps=1000 cum_att=168000 -> 169000
+progress step=169000 pe/N=-10.826944 accept=8930/169000 frac_interval=0.0000 round=30
+chunk 170: types 1-3 (Cr-V) n_steps=1000 cum_att=169000 -> 170000
+progress step=170000 pe/N=-10.827023 accept=8978/170000 frac_interval=0.0480 round=30
+chunk 171: types 1-4 (Cr-W) n_steps=1000 cum_att=170000 -> 171000
+progress step=171000 pe/N=-10.827042 accept=8980/171000 frac_interval=0.0020 round=31
+chunk 172: types 2-3 (Ta-V) n_steps=1000 cum_att=171000 -> 172000
+progress step=172000 pe/N=-10.827041 accept=8982/172000 frac_interval=0.0020 round=31
+chunk 173: types 2-4 (Ta-W) n_steps=1000 cum_att=172000 -> 173000
+progress step=173000 pe/N=-10.827029 accept=9021/173000 frac_interval=0.0390 round=31
+chunk 174: types 3-4 (V-W) n_steps=1000 cum_att=173000 -> 174000
+progress step=174000 pe/N=-10.827126 accept=9107/174000 frac_interval=0.0860 round=31
+chunk 175: types 1-2 (Cr-Ta) n_steps=1000 cum_att=174000 -> 175000
+progress step=175000 pe/N=-10.827126 accept=9107/175000 frac_interval=0.0000 round=31
+chunk 176: types 1-3 (Cr-V) n_steps=1000 cum_att=175000 -> 176000
+progress step=176000 pe/N=-10.827190 accept=9151/176000 frac_interval=0.0440 round=32
+chunk 177: types 1-4 (Cr-W) n_steps=1000 cum_att=176000 -> 177000
+progress step=177000 pe/N=-10.827192 accept=9153/177000 frac_interval=0.0020 round=32
+chunk 178: types 2-3 (Ta-V) n_steps=1000 cum_att=177000 -> 178000
+progress step=178000 pe/N=-10.827184 accept=9156/178000 frac_interval=0.0030 round=32
+chunk 179: types 2-4 (Ta-W) n_steps=1000 cum_att=178000 -> 179000
+progress step=179000 pe/N=-10.827171 accept=9198/179000 frac_interval=0.0420 round=32
+chunk 180: types 3-4 (V-W) n_steps=1000 cum_att=179000 -> 180000
+progress step=180000 pe/N=-10.827070 accept=9293/180000 frac_interval=0.0950 round=32
+chunk 181: types 1-2 (Cr-Ta) n_steps=1000 cum_att=180000 -> 181000
+progress step=181000 pe/N=-10.827070 accept=9293/181000 frac_interval=0.0000 round=32
+chunk 182: types 1-3 (Cr-V) n_steps=1000 cum_att=181000 -> 182000
+progress step=182000 pe/N=-10.827229 accept=9343/182000 frac_interval=0.0500 round=33
+chunk 183: types 1-4 (Cr-W) n_steps=1000 cum_att=182000 -> 183000
+progress step=183000 pe/N=-10.827232 accept=9345/183000 frac_interval=0.0020 round=33
+chunk 184: types 2-3 (Ta-V) n_steps=1000 cum_att=183000 -> 184000
+progress step=184000 pe/N=-10.827258 accept=9349/184000 frac_interval=0.0040 round=33
+chunk 185: types 2-4 (Ta-W) n_steps=1000 cum_att=184000 -> 185000
+progress step=185000 pe/N=-10.827232 accept=9396/185000 frac_interval=0.0470 round=33
+chunk 186: types 3-4 (V-W) n_steps=1000 cum_att=185000 -> 186000
+progress step=186000 pe/N=-10.827437 accept=9485/186000 frac_interval=0.0890 round=33
+chunk 187: types 1-2 (Cr-Ta) n_steps=1000 cum_att=186000 -> 187000
+progress step=187000 pe/N=-10.827437 accept=9485/187000 frac_interval=0.0000 round=34
+chunk 188: types 1-3 (Cr-V) n_steps=1000 cum_att=187000 -> 188000
+progress step=188000 pe/N=-10.827518 accept=9525/188000 frac_interval=0.0400 round=34
+chunk 189: types 1-4 (Cr-W) n_steps=1000 cum_att=188000 -> 189000
+progress step=189000 pe/N=-10.827520 accept=9528/189000 frac_interval=0.0030 round=34
+chunk 190: types 2-3 (Ta-V) n_steps=1000 cum_att=189000 -> 190000
+progress step=190000 pe/N=-10.827561 accept=9534/190000 frac_interval=0.0060 round=34
+chunk 191: types 2-4 (Ta-W) n_steps=1000 cum_att=190000 -> 191000
+progress step=191000 pe/N=-10.827471 accept=9577/191000 frac_interval=0.0430 round=34
+chunk 192: types 3-4 (V-W) n_steps=1000 cum_att=191000 -> 192000
+progress step=192000 pe/N=-10.827511 accept=9657/192000 frac_interval=0.0800 round=34
+chunk 193: types 1-2 (Cr-Ta) n_steps=1000 cum_att=192000 -> 193000
+progress step=193000 pe/N=-10.827511 accept=9657/193000 frac_interval=0.0000 round=35
+chunk 194: types 1-3 (Cr-V) n_steps=1000 cum_att=193000 -> 194000
+progress step=194000 pe/N=-10.827420 accept=9699/194000 frac_interval=0.0420 round=35
+chunk 195: types 1-4 (Cr-W) n_steps=1000 cum_att=194000 -> 195000
+progress step=195000 pe/N=-10.827410 accept=9703/195000 frac_interval=0.0040 round=35
+chunk 196: types 2-3 (Ta-V) n_steps=1000 cum_att=195000 -> 196000
+progress step=196000 pe/N=-10.827421 accept=9706/196000 frac_interval=0.0030 round=35
+chunk 197: types 2-4 (Ta-W) n_steps=1000 cum_att=196000 -> 197000
+progress step=197000 pe/N=-10.827446 accept=9735/197000 frac_interval=0.0290 round=35
+chunk 198: types 3-4 (V-W) n_steps=1000 cum_att=197000 -> 198000
+progress step=198000 pe/N=-10.827448 accept=9832/198000 frac_interval=0.0970 round=36
+chunk 199: types 1-2 (Cr-Ta) n_steps=1000 cum_att=198000 -> 199000
+progress step=199000 pe/N=-10.827448 accept=9832/199000 frac_interval=0.0000 round=36
+chunk 200: types 1-3 (Cr-V) n_steps=1000 cum_att=199000 -> 200000
+progress step=200000 pe/N=-10.827440 accept=9885/200000 frac_interval=0.0530 round=36
+chunk 201: types 1-4 (Cr-W) n_steps=1000 cum_att=200000 -> 201000
+progress step=201000 pe/N=-10.827431 accept=9888/201000 frac_interval=0.0030 round=36
+chunk 202: types 2-3 (Ta-V) n_steps=1000 cum_att=201000 -> 202000
+progress step=202000 pe/N=-10.827423 accept=9893/202000 frac_interval=0.0050 round=36
+chunk 203: types 2-4 (Ta-W) n_steps=1000 cum_att=202000 -> 203000
+progress step=203000 pe/N=-10.827595 accept=9933/203000 frac_interval=0.0400 round=36
+chunk 204: types 3-4 (V-W) n_steps=1000 cum_att=203000 -> 204000
+progress step=204000 pe/N=-10.827485 accept=10038/204000 frac_interval=0.1050 round=37
+chunk 205: types 1-2 (Cr-Ta) n_steps=1000 cum_att=204000 -> 205000
+progress step=205000 pe/N=-10.827485 accept=10038/205000 frac_interval=0.0000 round=37
+chunk 206: types 1-3 (Cr-V) n_steps=1000 cum_att=205000 -> 206000
+progress step=206000 pe/N=-10.827544 accept=10072/206000 frac_interval=0.0340 round=37
+chunk 207: types 1-4 (Cr-W) n_steps=1000 cum_att=206000 -> 207000
+progress step=207000 pe/N=-10.827546 accept=10074/207000 frac_interval=0.0020 round=37
+chunk 208: types 2-3 (Ta-V) n_steps=1000 cum_att=207000 -> 208000
+progress step=208000 pe/N=-10.827563 accept=10078/208000 frac_interval=0.0040 round=37
+chunk 209: types 2-4 (Ta-W) n_steps=1000 cum_att=208000 -> 209000
+progress step=209000 pe/N=-10.827564 accept=10123/209000 frac_interval=0.0450 round=38
+chunk 210: types 3-4 (V-W) n_steps=1000 cum_att=209000 -> 210000
+progress step=210000 pe/N=-10.827619 accept=10226/210000 frac_interval=0.1030 round=38
+chunk 211: types 1-2 (Cr-Ta) n_steps=1000 cum_att=210000 -> 211000
+progress step=211000 pe/N=-10.827619 accept=10226/211000 frac_interval=0.0000 round=38
+chunk 212: types 1-3 (Cr-V) n_steps=1000 cum_att=211000 -> 212000
+progress step=212000 pe/N=-10.827618 accept=10278/212000 frac_interval=0.0520 round=38
+chunk 213: types 1-4 (Cr-W) n_steps=1000 cum_att=212000 -> 213000
+progress step=213000 pe/N=-10.827584 accept=10282/213000 frac_interval=0.0040 round=38
+chunk 214: types 2-3 (Ta-V) n_steps=1000 cum_att=213000 -> 214000
+progress step=214000 pe/N=-10.827559 accept=10285/214000 frac_interval=0.0030 round=38
+chunk 215: types 2-4 (Ta-W) n_steps=1000 cum_att=214000 -> 215000
+progress step=215000 pe/N=-10.827515 accept=10330/215000 frac_interval=0.0450 round=39
+chunk 216: types 3-4 (V-W) n_steps=1000 cum_att=215000 -> 216000
+progress step=216000 pe/N=-10.827533 accept=10430/216000 frac_interval=0.1000 round=39
+chunk 217: types 1-2 (Cr-Ta) n_steps=1000 cum_att=216000 -> 217000
+progress step=217000 pe/N=-10.827533 accept=10430/217000 frac_interval=0.0000 round=39
+chunk 218: types 1-3 (Cr-V) n_steps=1000 cum_att=217000 -> 218000
+progress step=218000 pe/N=-10.827602 accept=10469/218000 frac_interval=0.0390 round=39
+chunk 219: types 1-4 (Cr-W) n_steps=1000 cum_att=218000 -> 219000
+[vmi3286411][[13495,1],3][../../../../../../opal/mca/btl/tcp/btl_tcp.c:559:mca_btl_tcp_recv_blocking] recv(17) failed: Connection reset by peer (104)
+progress step=219000 pe/N=-10.827588 accept=10472/219000 frac_interval=0.0030 round=39
+chunk 220: types 2-3 (Ta-V) n_steps=1000 cum_att=219000 -> 220000
+progress step=220000 pe/N=-10.827590 accept=10473/220000 frac_interval=0.0010 round=40
+chunk 221: types 2-4 (Ta-W) n_steps=1000 cum_att=220000 -> 221000
+progress step=221000 pe/N=-10.827606 accept=10510/221000 frac_interval=0.0370 round=40
+chunk 222: types 3-4 (V-W) n_steps=1000 cum_att=221000 -> 222000
+progress step=222000 pe/N=-10.827772 accept=10623/222000 frac_interval=0.1130 round=40
+chunk 223: types 1-2 (Cr-Ta) n_steps=1000 cum_att=222000 -> 223000
+progress step=223000 pe/N=-10.827772 accept=10623/223000 frac_interval=0.0000 round=40
+chunk 224: types 1-3 (Cr-V) n_steps=1000 cum_att=223000 -> 224000
+progress step=224000 pe/N=-10.827803 accept=10662/224000 frac_interval=0.0390 round=40
+chunk 225: types 1-4 (Cr-W) n_steps=1000 cum_att=224000 -> 225000
+progress step=225000 pe/N=-10.827789 accept=10666/225000 frac_interval=0.0040 round=40
+chunk 226: types 2-3 (Ta-V) n_steps=1000 cum_att=225000 -> 226000
+progress step=226000 pe/N=-10.827791 accept=10674/226000 frac_interval=0.0080 round=41
+chunk 227: types 2-4 (Ta-W) n_steps=1000 cum_att=226000 -> 227000
+progress step=227000 pe/N=-10.827791 accept=10713/227000 frac_interval=0.0390 round=41
+chunk 228: types 3-4 (V-W) n_steps=1000 cum_att=227000 -> 228000
+progress step=228000 pe/N=-10.827962 accept=10806/228000 frac_interval=0.0930 round=41
+chunk 229: types 1-2 (Cr-Ta) n_steps=1000 cum_att=228000 -> 229000
+progress step=229000 pe/N=-10.827962 accept=10806/229000 frac_interval=0.0000 round=41
+chunk 230: types 1-3 (Cr-V) n_steps=1000 cum_att=229000 -> 230000
+progress step=230000 pe/N=-10.828010 accept=10864/230000 frac_interval=0.0580 round=41
+chunk 231: types 1-4 (Cr-W) n_steps=1000 cum_att=230000 -> 231000
+progress step=231000 pe/N=-10.828020 accept=10866/231000 frac_interval=0.0020 round=42
+chunk 232: types 2-3 (Ta-V) n_steps=1000 cum_att=231000 -> 232000
+progress step=232000 pe/N=-10.828020 accept=10866/232000 frac_interval=0.0000 round=42
+chunk 233: types 2-4 (Ta-W) n_steps=1000 cum_att=232000 -> 233000
+progress step=233000 pe/N=-10.828059 accept=10924/233000 frac_interval=0.0580 round=42
+chunk 234: types 3-4 (V-W) n_steps=1000 cum_att=233000 -> 234000
+progress step=234000 pe/N=-10.828109 accept=10993/234000 frac_interval=0.0690 round=42
+chunk 235: types 1-2 (Cr-Ta) n_steps=1000 cum_att=234000 -> 235000
+progress step=235000 pe/N=-10.828109 accept=10993/235000 frac_interval=0.0000 round=42
+chunk 236: types 1-3 (Cr-V) n_steps=1000 cum_att=235000 -> 236000
+progress step=236000 pe/N=-10.828103 accept=11035/236000 frac_interval=0.0420 round=43
+chunk 237: types 1-4 (Cr-W) n_steps=1000 cum_att=236000 -> 237000
+progress step=237000 pe/N=-10.828103 accept=11035/237000 frac_interval=0.0000 round=43
+chunk 238: types 2-3 (Ta-V) n_steps=1000 cum_att=237000 -> 238000
+progress step=238000 pe/N=-10.828096 accept=11037/238000 frac_interval=0.0020 round=43
+chunk 239: types 2-4 (Ta-W) n_steps=1000 cum_att=238000 -> 239000
+progress step=239000 pe/N=-10.828177 accept=11075/239000 frac_interval=0.0380 round=43
+chunk 240: types 3-4 (V-W) n_steps=1000 cum_att=239000 -> 240000
+progress step=240000 pe/N=-10.828295 accept=11154/240000 frac_interval=0.0790 round=43
+chunk 241: types 1-2 (Cr-Ta) n_steps=1000 cum_att=240000 -> 241000
+progress step=241000 pe/N=-10.828295 accept=11154/241000 frac_interval=0.0000 round=43
+chunk 242: types 1-3 (Cr-V) n_steps=1000 cum_att=241000 -> 242000
+progress step=242000 pe/N=-10.828368 accept=11198/242000 frac_interval=0.0440 round=44
+chunk 243: types 1-4 (Cr-W) n_steps=1000 cum_att=242000 -> 243000
+progress step=243000 pe/N=-10.828367 accept=11199/243000 frac_interval=0.0010 round=44
+chunk 244: types 2-3 (Ta-V) n_steps=1000 cum_att=243000 -> 244000
+progress step=244000 pe/N=-10.828366 accept=11200/244000 frac_interval=0.0010 round=44
+chunk 245: types 2-4 (Ta-W) n_steps=1000 cum_att=244000 -> 245000
+progress step=245000 pe/N=-10.828370 accept=11230/245000 frac_interval=0.0300 round=44
+chunk 246: types 3-4 (V-W) n_steps=1000 cum_att=245000 -> 246000
+progress step=246000 pe/N=-10.828413 accept=11288/246000 frac_interval=0.0580 round=44
+chunk 247: types 1-2 (Cr-Ta) n_steps=1000 cum_att=246000 -> 247000
+progress step=247000 pe/N=-10.828413 accept=11288/247000 frac_interval=0.0000 round=45
+chunk 248: types 1-3 (Cr-V) n_steps=1000 cum_att=247000 -> 248000
+progress step=248000 pe/N=-10.828497 accept=11342/248000 frac_interval=0.0540 round=45
+chunk 249: types 1-4 (Cr-W) n_steps=1000 cum_att=248000 -> 249000
+progress step=249000 pe/N=-10.828497 accept=11342/249000 frac_interval=0.0000 round=45
+chunk 250: types 2-3 (Ta-V) n_steps=1000 cum_att=249000 -> 250000
+progress step=250000 pe/N=-10.828479 accept=11346/250000 frac_interval=0.0040 round=45
+chunk 251: types 2-4 (Ta-W) n_steps=1000 cum_att=250000 -> 251000
+progress step=251000 pe/N=-10.828471 accept=11379/251000 frac_interval=0.0330 round=45
+chunk 252: types 3-4 (V-W) n_steps=1000 cum_att=251000 -> 252000
+progress step=252000 pe/N=-10.828553 accept=11447/252000 frac_interval=0.0680 round=45
+chunk 253: types 1-2 (Cr-Ta) n_steps=1000 cum_att=252000 -> 253000
+progress step=253000 pe/N=-10.828553 accept=11447/253000 frac_interval=0.0000 round=46
+chunk 254: types 1-3 (Cr-V) n_steps=1000 cum_att=253000 -> 254000
+progress step=254000 pe/N=-10.828545 accept=11494/254000 frac_interval=0.0470 round=46
+chunk 255: types 1-4 (Cr-W) n_steps=1000 cum_att=254000 -> 255000
+progress step=255000 pe/N=-10.828538 accept=11496/255000 frac_interval=0.0020 round=46
+chunk 256: types 2-3 (Ta-V) n_steps=1000 cum_att=255000 -> 256000
+progress step=256000 pe/N=-10.828537 accept=11498/256000 frac_interval=0.0020 round=46
+chunk 257: types 2-4 (Ta-W) n_steps=1000 cum_att=256000 -> 257000
+progress step=257000 pe/N=-10.828495 accept=11533/257000 frac_interval=0.0350 round=46
+chunk 258: types 3-4 (V-W) n_steps=1000 cum_att=257000 -> 258000
+progress step=258000 pe/N=-10.828479 accept=11613/258000 frac_interval=0.0800 round=47
+chunk 259: types 1-2 (Cr-Ta) n_steps=1000 cum_att=258000 -> 259000
+progress step=259000 pe/N=-10.828479 accept=11613/259000 frac_interval=0.0000 round=47
+chunk 260: types 1-3 (Cr-V) n_steps=1000 cum_att=259000 -> 260000
+progress step=260000 pe/N=-10.828462 accept=11652/260000 frac_interval=0.0390 round=47
+chunk 261: types 1-4 (Cr-W) n_steps=1000 cum_att=260000 -> 261000
+progress step=261000 pe/N=-10.828445 accept=11654/261000 frac_interval=0.0020 round=47
+chunk 262: types 2-3 (Ta-V) n_steps=1000 cum_att=261000 -> 262000
+progress step=262000 pe/N=-10.828448 accept=11655/262000 frac_interval=0.0010 round=47
+chunk 263: types 2-4 (Ta-W) n_steps=1000 cum_att=262000 -> 263000
+progress step=263000 pe/N=-10.828501 accept=11698/263000 frac_interval=0.0430 round=47
+chunk 264: types 3-4 (V-W) n_steps=1000 cum_att=263000 -> 264000
+progress step=264000 pe/N=-10.828431 accept=11784/264000 frac_interval=0.0860 round=48
+chunk 265: types 1-2 (Cr-Ta) n_steps=1000 cum_att=264000 -> 265000
+progress step=265000 pe/N=-10.828431 accept=11784/265000 frac_interval=0.0000 round=48
+chunk 266: types 1-3 (Cr-V) n_steps=1000 cum_att=265000 -> 266000
+progress step=266000 pe/N=-10.828325 accept=11835/266000 frac_interval=0.0510 round=48
+chunk 267: types 1-4 (Cr-W) n_steps=1000 cum_att=266000 -> 267000
+progress step=267000 pe/N=-10.828326 accept=11836/267000 frac_interval=0.0010 round=48
+chunk 268: types 2-3 (Ta-V) n_steps=1000 cum_att=267000 -> 268000
+progress step=268000 pe/N=-10.828322 accept=11837/268000 frac_interval=0.0010 round=48
+chunk 269: types 2-4 (Ta-W) n_steps=1000 cum_att=268000 -> 269000
+progress step=269000 pe/N=-10.828350 accept=11875/269000 frac_interval=0.0380 round=49
+chunk 270: types 3-4 (V-W) n_steps=1000 cum_att=269000 -> 270000
+progress step=270000 pe/N=-10.828413 accept=11976/270000 frac_interval=0.1010 round=49
+chunk 271: types 1-2 (Cr-Ta) n_steps=1000 cum_att=270000 -> 271000
+progress step=271000 pe/N=-10.828413 accept=11976/271000 frac_interval=0.0000 round=49
+chunk 272: types 1-3 (Cr-V) n_steps=1000 cum_att=271000 -> 272000
+progress step=272000 pe/N=-10.828507 accept=12025/272000 frac_interval=0.0490 round=49
+chunk 273: types 1-4 (Cr-W) n_steps=1000 cum_att=272000 -> 273000
+progress step=273000 pe/N=-10.828518 accept=12029/273000 frac_interval=0.0040 round=49
+chunk 274: types 2-3 (Ta-V) n_steps=1000 cum_att=273000 -> 274000
+progress step=274000 pe/N=-10.828518 accept=12029/274000 frac_interval=0.0000 round=49
+chunk 275: types 2-4 (Ta-W) n_steps=1000 cum_att=274000 -> 275000
+progress step=275000 pe/N=-10.828464 accept=12079/275000 frac_interval=0.0500 round=50
+chunk 276: types 3-4 (V-W) n_steps=1000 cum_att=275000 -> 276000
+progress step=276000 pe/N=-10.828469 accept=12163/276000 frac_interval=0.0840 round=50
+chunk 277: types 1-2 (Cr-Ta) n_steps=1000 cum_att=276000 -> 277000
+progress step=277000 pe/N=-10.828469 accept=12163/277000 frac_interval=0.0000 round=50
+chunk 278: types 1-3 (Cr-V) n_steps=1000 cum_att=277000 -> 278000
+progress step=278000 pe/N=-10.828510 accept=12198/278000 frac_interval=0.0350 round=50
+chunk 279: types 1-4 (Cr-W) n_steps=1000 cum_att=278000 -> 279000
+progress step=279000 pe/N=-10.828558 accept=12201/279000 frac_interval=0.0030 round=50
+chunk 280: types 2-3 (Ta-V) n_steps=1000 cum_att=279000 -> 280000
+progress step=280000 pe/N=-10.828552 accept=12203/280000 frac_interval=0.0020 round=51
+chunk 281: types 2-4 (Ta-W) n_steps=1000 cum_att=280000 -> 281000
+progress step=281000 pe/N=-10.828575 accept=12233/281000 frac_interval=0.0300 round=51
+chunk 282: types 3-4 (V-W) n_steps=1000 cum_att=281000 -> 282000

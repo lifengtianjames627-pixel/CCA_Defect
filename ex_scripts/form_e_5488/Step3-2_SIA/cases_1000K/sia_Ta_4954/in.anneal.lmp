@@ -1,0 +1,39 @@
+units           metal
+atom_style      atomic
+boundary        p p p
+atom_modify     map array
+
+read_data       start.data
+
+pair_style      hybrid/overlay tabgap eam/fs
+pair_coeff      * * tabgap /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.tabgap Cr Ta V W
+pair_coeff      * * eam/fs /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.eam.fs Cr Ta V W
+
+neighbor        2.0 bin
+neigh_modify    delay 0 every 1 check yes
+
+# Stage 1. Pull apart any remaining overlap. This is not the formation energy.
+print           "PROGRESS Ta:4954 overlap"
+minimize        1.0e-4 1.0e-4 500 5000
+
+# Stage 2. Short molecular dynamics at the anneal temperature.
+print           "PROGRESS Ta:4954 md"
+velocity        all create 1000.0000 61887 mom yes rot yes dist gaussian
+fix             hot all nvt temp 1000.0000 1000.0000 0.1
+timestep        0.001
+thermo          500
+run             5000
+unfix           hot
+
+# Stage 3. Linear cool to 1 K over this run. fix nvt ramps from Tstart to Tstop.
+# The final basin is found by minimization, not by this thermostat.
+print           "PROGRESS Ta:4954 cool"
+fix             cool all nvt temp 1000.0000 1.0 0.1
+run             20000
+unfix           cool
+velocity        all set 0.0 0.0 0.0
+
+# Stage 4. Thorough minimization at the bulk volume.
+print           "PROGRESS Ta:4954 minimize"
+minimize        1.0e-8 1.0e-6 5000 50000
+write_data      relaxed.data

@@ -1,0 +1,5 @@
+Q=-1.350207338945243
+worst_abs_deviation_excluding_zerolet=0.005375364431486874
+n_cluster_vector_components=22
+optimality_weight=1
+optimality_tol=1e-05

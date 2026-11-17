@@ -1,0 +1,300 @@
+# logical cpu 11
+LAMMPS (30 Sep 2026 - Development - c71ef81)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  triclinic box = (0.52399621 0.52399621 0.52399621) to (43.860422 43.860422 43.860422) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  5489 atoms
+  read_data CPU = 0.028 seconds
+tabGAP coeff: type 1 is element Cr
+tabGAP coeff: type 2 is element Ta
+tabGAP coeff: type 3 is element V
+tabGAP coeff: type 4 is element W
+tabGAP read_file: reading potential file...
+Reading tabgap potential file /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.tabgap with DATE: 2024-05-15
+tabGAP read_file: e0 for element V type 3 is -3.60796
+tabGAP read_file: e0 for element Cr type 1 is -5.44605
+tabGAP read_file: e0 for element Ta type 2 is -3.69872
+tabGAP read_file: e0 for element W type 4 is -4.57087
+tabGAP read_file: expecting to read in 0 2b potentials and 40 3b potentials
+tabGAP read_file: reading 3b potential 0: V V V
+tabGAP read_file: reading 3b potential 1: V V Cr
+tabGAP read_file: reading 3b potential 2: V V Ta
+tabGAP read_file: reading 3b potential 3: V V W
+tabGAP read_file: reading 3b potential 4: V Cr Cr
+tabGAP read_file: reading 3b potential 5: V Cr Ta
+tabGAP read_file: reading 3b potential 6: V Cr W
+tabGAP read_file: reading 3b potential 7: V Ta Ta
+tabGAP read_file: reading 3b potential 8: V Ta W
+tabGAP read_file: reading 3b potential 9: V W W
+tabGAP read_file: reading 3b potential 10: Cr V V
+tabGAP read_file: reading 3b potential 11: Cr V Cr
+tabGAP read_file: reading 3b potential 12: Cr V Ta
+tabGAP read_file: reading 3b potential 13: Cr V W
+tabGAP read_file: reading 3b potential 14: Cr Cr Cr
+tabGAP read_file: reading 3b potential 15: Cr Cr Ta
+tabGAP read_file: reading 3b potential 16: Cr Cr W
+tabGAP read_file: reading 3b potential 17: Cr Ta Ta
+tabGAP read_file: reading 3b potential 18: Cr Ta W
+tabGAP read_file: reading 3b potential 19: Cr W W
+tabGAP read_file: reading 3b potential 20: Ta V V
+tabGAP read_file: reading 3b potential 21: Ta V Cr
+tabGAP read_file: reading 3b potential 22: Ta V Ta
+tabGAP read_file: reading 3b potential 23: Ta V W
+tabGAP read_file: reading 3b potential 24: Ta Cr Cr
+tabGAP read_file: reading 3b potential 25: Ta Cr Ta
+tabGAP read_file: reading 3b potential 26: Ta Cr W
+tabGAP read_file: reading 3b potential 27: Ta Ta Ta
+tabGAP read_file: reading 3b potential 28: Ta Ta W
+tabGAP read_file: reading 3b potential 29: Ta W W
+tabGAP read_file: reading 3b potential 30: W V V
+tabGAP read_file: reading 3b potential 31: W V Cr
+tabGAP read_file: reading 3b potential 32: W V Ta
+tabGAP read_file: reading 3b potential 33: W V W
+tabGAP read_file: reading 3b potential 34: W Cr Cr
+tabGAP read_file: reading 3b potential 35: W Cr Ta
+tabGAP read_file: reading 3b potential 36: W Cr W
+tabGAP read_file: reading 3b potential 37: W Ta Ta
+tabGAP read_file: reading 3b potential 38: W Ta W
+tabGAP read_file: reading 3b potential 39: W W W
+tabGAP read_file: done
+tabGAP coeff: done reading coefficients
+Reading eam/fs potential file /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.eam.fs with DATE: 2024-05-15
+PROGRESS W:646 overlap
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7
+  ghost atom cutoff = 7
+  binsize = 3.5, bins = 13 13 13
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair tabgap, perpetual
+      attributes: full, newton on, cut 6.1
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+  (2) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton/tri
+      stencil: half/bin/3d/tri
+      bin: standard
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 7.895 | 7.895 | 7.895 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0             -59511.617      0             -59511.617      2426.6391    
+         4   0             -59548.731      0             -59548.731      1123.2799    
+Loop time of 0.674669 on 1 procs for 4 steps with 5489 atoms
+
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+      -59511.617493115  -59543.5823745436  -59548.7313210927
+  Force two-norm initial, final = 172.36089 21.786686
+  Force max component initial, final = 126.58976 10.884542
+  Final line search alpha, max atom move = 0.005571411 0.060642256
+  Iterations, force evaluations = 4 4
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.67334    | 0.67334    | 0.67334    |   0.0 | 99.80
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.00031439 | 0.00031439 | 0.00031439 |   0.0 |  0.05
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.001012   |            |       |  0.15
+
+Nlocal:           5489 ave        5489 max        5489 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           7204 ave        7204 max        7204 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         299747 ave      299747 max      299747 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:       320868 ave      320868 max      320868 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 320868
+Ave neighs/atom = 58.456549
+Neighbor list builds = 0
+Dangerous builds = 0
+PROGRESS W:646 md
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 4
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 6.77 | 6.77 | 6.77 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         4   1000          -59548.731      0             -58839.352      10433.042    
+       500   811.03809     -58986.755      0             -58411.421      38615.274    
+      1000   1023.2767     -58798.059      0             -58072.167      50473.326    
+      1500   1002.446      -58812.929      0             -58101.814      49150.427    
+      2000   988.71339     -58849.655      0             -58148.282      47168.041    
+      2500   1006.5809     -58847.13       0             -58133.082      47638.336    
+      3000   1010.5976     -58825.3        0             -58108.403      48399.566    
+      3500   998.85532     -58826.261      0             -58117.693      48693.751    
+      4000   999.65397     -58849.58       0             -58140.446      46989.091    
+      4500   993.89027     -58833.572      0             -58128.527      47999.823    
+      5000   1012.6487     -58826.784      0             -58108.432      48420.6      
+      5004   1011.0912     -58825.792      0             -58108.544      48449.045    
+Loop time of 1227.32 on 1 procs for 5000 steps with 5489 atoms
+
+Performance: 0.352 ns/day, 68.185 hours/ns, 4.074 timesteps/s, 22.362 katom-step/s
+99.9% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 1224.7     | 1224.7     | 1224.7     |   0.0 | 99.78
+Neigh   | 0.42349    | 0.42349    | 0.42349    |   0.0 |  0.03
+Comm    | 0.84462    | 0.84462    | 0.84462    |   0.0 |  0.07
+Output  | 0.0088582  | 0.0088582  | 0.0088582  |   0.0 |  0.00
+Modify  | 1.1769     | 1.1769     | 1.1769     |   0.0 |  0.10
+Other   |            | 0.1864     |            |       |  0.02
+
+Nlocal:           5489 ave        5489 max        5489 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           7204 ave        7204 max        7204 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         283095 ave      283095 max      283095 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:       327316 ave      327316 max      327316 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 327316
+Ave neighs/atom = 59.631263
+Neighbor list builds = 8
+Dangerous builds = 0
+PROGRESS W:646 cool
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 5004
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 6.773 | 6.773 | 6.773 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+      5004   1011.0912     -58825.792      0             -58108.544      48449.045    
+      5500   966.88183     -58845.898      0             -58160.012      46865.833    
+      6000   940.23683     -58868.721      0             -58201.736      45582.427    
+      6500   922.62283     -58891.917      0             -58237.427      44480.571    
+      7000   896.10027     -58897.943      0             -58262.267      43489.449    
+      7500   872.03385     -58918.806      0             -58300.202      42200.521    
+      8000   863.57394     -58944.914      0             -58332.312      40989.988    
+      8500   821.87197     -58951.76       0             -58368.74       40190.914    
+      9000   811.86965     -58982.403      0             -58406.48       38346.703    
+      9500   787.99611     -59000.095      0             -58441.107      37718.633    
+     10000   753.76044     -59011.612      0             -58476.91       36964.703    
+     10500   720.4689      -59025.811      0             -58514.725      35576.466    
+     11000   702.5469      -59048.67       0             -58550.298      34465.872    
+     11500   678.80342     -59068.461      0             -58586.931      33078.896    
+     12000   664.38054     -59093.165      0             -58621.867      31753.926    
+     12500   637.23718     -59109.764      0             -58657.721      30393.27     
+     13000   609.77382     -59126.202      0             -58693.641      29227.046    
+     13500   582.5334      -59143.259      0             -58730.022      28331.774    
+     14000   555.78719     -59159.844      0             -58765.58       27000.153    
+     14500   523.92939     -59174.512      0             -58802.847      26092.154    
+     15000   505.0898      -59196.779      0             -58838.479      25017.554    
+     15500   478.60686     -59213.894      0             -58874.38       23690.252    
+     16000   456.31853     -59233.54       0             -58909.837      22363.612    
+     16500   435.45077     -59255.07       0             -58946.17       21032.228    
+     17000   409.54136     -59271.686      0             -58981.166      20293.949    
+     17500   382.63995     -59289.191      0             -59017.754      18910.666    
+     18000   357.21706     -59307.041      0             -59053.638      17686.164    
+     18500   326.10476     -59320.732      0             -59089.4        16636.131    
+     19000   308.50319     -59343.714      0             -59124.868      15394.526    
+     19500   281.97618     -59360.451      0             -59160.423      14197.955    
+     20000   255.57096     -59377.562      0             -59196.265      13131.069    
+     20500   231.72963     -59396.021      0             -59231.636      11951.463    
+[vmi3286411:762021] tcp_peer_recv_connect_ack: invalid header type: 230
+     21000   204.6743      -59412.325      0             -59267.133      10844.76     
+     21500   181.70181     -59431.445      0             -59302.549      9514.0202    
+     22000   157.54898     -59449.376      0             -59337.614      8161.1012    
+     22500   132.6413      -59466.596      0             -59372.503      7069.878     
+     23000   108.48011     -59484.37       0             -59407.417      5896.5616    
+     23500   83.078747     -59500.737      0             -59441.803      4750.1938    
+     24000   60.051614     -59518.14       0             -59475.54       3567.1383    
+     24500   36.80435      -59534.589      0             -59508.481      2492.3592    
+     25000   12.858067     -59551.667      0             -59542.545      1313.2672    
+     25004   12.573808     -59551.864      0             -59542.945      1301.4744    
+Loop time of 3802.05 on 1 procs for 20000 steps with 5489 atoms
+
+Performance: 0.454 ns/day, 52.806 hours/ns, 5.260 timesteps/s, 28.874 katom-step/s
+99.9% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 3795.5     | 3795.5     | 3795.5     |   0.0 | 99.83
+Neigh   | 0.26279    | 0.26279    | 0.26279    |   0.0 |  0.01
+Comm    | 1.6547     | 1.6547     | 1.6547     |   0.0 |  0.04
+Output  | 0.21343    | 0.21343    | 0.21343    |   0.0 |  0.01
+Modify  | 3.7191     | 3.7191     | 3.7191     |   0.0 |  0.10
+Other   |            | 0.749      |            |       |  0.02
+
+Nlocal:           5489 ave        5489 max        5489 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           7204 ave        7204 max        7204 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         284212 ave      284212 max      284212 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:       327016 ave      327016 max      327016 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 327016
+Ave neighs/atom = 59.576608
+Neighbor list builds = 4
+Dangerous builds = 0
+PROGRESS W:646 minimize
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 25004
+Per MPI rank memory allocation (min/avg/max) = 7.898 | 7.898 | 7.898 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+     25004   0             -59551.864      0             -59551.864      1184.4152    
+     25022   0             -59561.185      0             -59561.185      636.65885    
+Loop time of 4.84243 on 1 procs for 18 steps with 5489 atoms
+
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -59551.8642816962  -59561.1840722785  -59561.1845608249
+  Force two-norm initial, final = 15.637823 0.097483397
+  Force max component initial, final = 0.5137524 0.032543326
+  Final line search alpha, max atom move = 1 0.032543326
+  Iterations, force evaluations = 18 36
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 4.8343     | 4.8343     | 4.8343     |   0.0 | 99.83
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0025585  | 0.0025585  | 0.0025585  |   0.0 |  0.05
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.005544   |            |       |  0.11
+
+Nlocal:           5489 ave        5489 max        5489 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           7204 ave        7204 max        7204 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         299591 ave      299591 max      299591 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:       320786 ave      320786 max      320786 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 320786
+Ave neighs/atom = 58.44161
+Neighbor list builds = 0
+Dangerous builds = 0
+System init for write_data ...
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Total wall time: 1:24:22

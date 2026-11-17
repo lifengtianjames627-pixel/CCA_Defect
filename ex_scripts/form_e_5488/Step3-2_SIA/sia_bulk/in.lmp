@@ -1,0 +1,17 @@
+units           metal
+atom_style      atomic
+boundary        p p p
+atom_modify     map array
+
+read_data       start.data
+
+pair_style      hybrid/overlay tabgap eam/fs
+pair_coeff      * * tabgap /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.tabgap Cr Ta V W
+pair_coeff      * * eam/fs /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.eam.fs Cr Ta V W
+
+neighbor        2.0 bin
+neigh_modify    delay 0 every 1 check yes
+
+fix             box all box/relax iso 0.0 vmax 0.001
+minimize        1.0e-8 1.0e-6 5000 50000
+write_data      relaxed.data

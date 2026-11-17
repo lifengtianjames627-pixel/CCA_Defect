@@ -1,0 +1,129 @@
+LAMMPS (30 Sep 2026 - Development - c71ef81)
+  using 1 OpenMP thread(s) per MPI task
+Reading data file ...
+  triclinic box = (0.48409953 0.48409953 0.48409953) to (43.900318 43.900318 43.900318) with tilt (0 0 0)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  5488 atoms
+  read_data CPU = 0.024 seconds
+tabGAP coeff: type 1 is element Cr
+tabGAP coeff: type 2 is element Ta
+tabGAP coeff: type 3 is element V
+tabGAP coeff: type 4 is element W
+tabGAP read_file: reading potential file...
+Reading tabgap potential file /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.tabgap with DATE: 2024-05-15
+tabGAP read_file: e0 for element V type 3 is -3.60796
+tabGAP read_file: e0 for element Cr type 1 is -5.44605
+tabGAP read_file: e0 for element Ta type 2 is -3.69872
+tabGAP read_file: e0 for element W type 4 is -4.57087
+tabGAP read_file: expecting to read in 0 2b potentials and 40 3b potentials
+tabGAP read_file: reading 3b potential 0: V V V
+tabGAP read_file: reading 3b potential 1: V V Cr
+tabGAP read_file: reading 3b potential 2: V V Ta
+tabGAP read_file: reading 3b potential 3: V V W
+tabGAP read_file: reading 3b potential 4: V Cr Cr
+tabGAP read_file: reading 3b potential 5: V Cr Ta
+tabGAP read_file: reading 3b potential 6: V Cr W
+tabGAP read_file: reading 3b potential 7: V Ta Ta
+tabGAP read_file: reading 3b potential 8: V Ta W
+tabGAP read_file: reading 3b potential 9: V W W
+tabGAP read_file: reading 3b potential 10: Cr V V
+tabGAP read_file: reading 3b potential 11: Cr V Cr
+tabGAP read_file: reading 3b potential 12: Cr V Ta
+tabGAP read_file: reading 3b potential 13: Cr V W
+tabGAP read_file: reading 3b potential 14: Cr Cr Cr
+tabGAP read_file: reading 3b potential 15: Cr Cr Ta
+tabGAP read_file: reading 3b potential 16: Cr Cr W
+tabGAP read_file: reading 3b potential 17: Cr Ta Ta
+tabGAP read_file: reading 3b potential 18: Cr Ta W
+tabGAP read_file: reading 3b potential 19: Cr W W
+tabGAP read_file: reading 3b potential 20: Ta V V
+tabGAP read_file: reading 3b potential 21: Ta V Cr
+tabGAP read_file: reading 3b potential 22: Ta V Ta
+tabGAP read_file: reading 3b potential 23: Ta V W
+tabGAP read_file: reading 3b potential 24: Ta Cr Cr
+tabGAP read_file: reading 3b potential 25: Ta Cr Ta
+tabGAP read_file: reading 3b potential 26: Ta Cr W
+tabGAP read_file: reading 3b potential 27: Ta Ta Ta
+tabGAP read_file: reading 3b potential 28: Ta Ta W
+tabGAP read_file: reading 3b potential 29: Ta W W
+tabGAP read_file: reading 3b potential 30: W V V
+tabGAP read_file: reading 3b potential 31: W V Cr
+tabGAP read_file: reading 3b potential 32: W V Ta
+tabGAP read_file: reading 3b potential 33: W V W
+tabGAP read_file: reading 3b potential 34: W Cr Cr
+tabGAP read_file: reading 3b potential 35: W Cr Ta
+tabGAP read_file: reading 3b potential 36: W Cr W
+tabGAP read_file: reading 3b potential 37: W Ta Ta
+tabGAP read_file: reading 3b potential 38: W Ta W
+tabGAP read_file: reading 3b potential 39: W W W
+tabGAP read_file: done
+tabGAP coeff: done reading coefficients
+Reading eam/fs potential file /home/lammpsuser/HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V/Cr-Ta-V-W.eam.fs with DATE: 2024-05-15
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 7
+  ghost atom cutoff = 7
+  binsize = 3.5, bins = 13 13 13
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair tabgap, perpetual
+      attributes: full, newton on, cut 6.1
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+  (2) pair eam/fs, perpetual
+      attributes: half, newton on
+      pair build: half/bin/atomonly/newton/tri
+      stencil: half/bin/3d/tri
+      bin: standard
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+WARNING: Energy due to 1 extra global DOFs will be included in minimizer energies
+ (src/min.cpp:224)
+Per MPI rank memory allocation (min/avg/max) = 7.515 | 7.515 | 7.515 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press          Volume    
+         0   0             -59427.22       0             -59427.22      -7269.672       81838.185    
+        11   0             -59549.769      0             -59549.769      47.293532      81387.79     
+Loop time of 2.20088 on 1 procs for 11 steps with 5488 atoms
+
+100.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -59427.2197111007  -59549.7685011353  -59549.7685771677
+  Force two-norm initial, final = 1115.7194 9.6690034
+  Force max component initial, final = 1113.9911 7.2205589
+  Final line search alpha, max atom move = 0.0001762884 0.0012729007
+  Iterations, force evaluations = 11 19
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 2.1929     | 2.1929     | 2.1929     |   0.0 | 99.64
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.00085225 | 0.00085225 | 0.00085225 |   0.0 |  0.04
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.007084   |            |       |  0.32
+
+Nlocal:           5488 ave        5488 max        5488 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           7203 ave        7203 max        7203 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         293722 ave      293722 max      293722 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:       321436 ave      321436 max      321436 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 321436
+Ave neighs/atom = 58.5707
+Neighbor list builds = 0
+Dangerous builds = 0
+System init for write_data ...
+tabGAP settings: neighbor list sorting 1 cached 3b spline 1
+Total wall time: 0:00:19
+# logical cpu 0
