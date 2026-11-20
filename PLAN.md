@@ -10,7 +10,7 @@ Canonical plan file: [`.cursor/plans/rcca-workflow.plan.md`](.cursor/plans/rcca-
 - [x] Parameterize and port Stage 1 SQS from `ex_scripts/Step1_SQS`
 - [x] Port Stage 2 Metropolis aging; chain from Stage 1 POSCAR
 - [x] Port Stage 3-1 vacancy formation with family mu/masses
-- [ ] Port Stage 3-2 SIA anneal only; strip all classification logic and class CSV/fields
+- [x] Port Stage 3-2 SIA anneal + **element-pair** chemistry only (no geometry/orientation classifier)
 - [ ] Build Streamlit GUI to configure family/stages and emit chained job packs
 - [ ] Validate end-to-end on a reduced supercell before 5488 defaults
 
@@ -105,11 +105,12 @@ Each stage writes a small `manifest.json` (inputs used, outputs produced, seeds,
 - Sample N sites per element; concurrent serial `lmp` workers; CSV columns like the example (`site_id`, `removed_element`, nn counts, energies).
 - `mu` and masses come from **family config**, not hardcoded W–Ta–Cr–V constants.
 
-### Stage 3-2 — SIA formation (no classification)
+### Stage 3-2 — SIA formation (element-pair only; no geometry)
 - Keep Zhou-style random insertion (0.8–1.4 Å, reject < 0.7 Å) + anneal protocol: short min → NVT at `ANNEAL_K` → linear cool → full min.
 - \(E_f^{\mathrm{SIA}}(A) = E_{\mathrm{SIA}} - E_{\mathrm{bulk}} - \mu_A\) with **inserted** species A.
-- CSV keeps job/site/host/inserted/coords/energies/`status`/`note` only — **drop all classifier-derived columns and `sia_classes_*.csv`.**
-- Still import shared cell I/O / potential helpers from the vacancy module (as today), without loading `classify_sia_geometry.py`.
+- After anneal, label **chemical pair only** (`element_a`, `element_b`, `pair`, `class_key=pair`) via Wigner–Seitz site occupancy — e.g. `Cr-V`, `W-W`.
+- **Do not** port geometry classifier: no `geometry` / `orientation` / oct / ⟨110⟩ / ⟨111⟩ / ⟨221⟩; do **not** write `sia_classes_*.csv`. Pair histogram → `sia_pairs_<T>K.csv`.
+- Shared cell I/O from `lammps_cell` / vacancy helpers; never load `classify_sia_geometry.py`.
 
 ## Family + potential (the real coupling point)
 
@@ -143,6 +144,6 @@ Reuse ideas from `legacy_icet_sqs/` only where useful (structure upload, downloa
 2. ~~Port Stage 1 driver as parameterized module; golden-check against `ex_scripts/Step1_SQS` outputs shape.~~ **done** (`rcca_workflow/stages/sqs.py` + `sqs_driver.py`; `tests/test_sqs_stage.py`)
 3. ~~Port Stage 2; chain from Stage 1 POSCAR.~~ **done** (`metropolis.py` + `metropolis_driver.py`; `tests/test_metropolis_stage.py`)
 4. ~~Port Stage 3-1 vacancy.~~ **done** (`vacancy.py` + `vacancy_driver.py` + shared `lammps_cell.py`; `tests/test_vacancy_stage.py`)
-5. Port Stage 3-2 SIA **with Part 3 deleted**; energy CSV schema without class fields.
+5. ~~Port Stage 3-2 SIA.~~ **done** — anneal + Ef; **element-pair** via WS occupancy (`sia_pair.py`); **no** oct / ⟨110⟩ / ⟨111⟩ / ⟨221⟩; summary is `sia_pairs_<T>K.csv` (not `sia_classes_*`).
 6. Streamlit GUI that fills configs and writes a runnable pack directory.
 7. One end-to-end dry run on a small supercell (e.g. reduced `SUPERCELL_REP`) to validate chaining before 5488-scale defaults.

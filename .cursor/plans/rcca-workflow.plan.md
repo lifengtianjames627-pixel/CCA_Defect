@@ -56,7 +56,7 @@ Each stage writes `manifest.json` (inputs, outputs, seeds, potential hash, compo
 2. **Port Stage 1 SQS** — done (`stages/sqs.py`, `stages/sqs_driver.py`, golden shape tests)
 3. **Port Stage 2 Metropolis** — done (`stages/metropolis.py`, `metropolis_driver.py`, chain from Stage-1 POSCAR)
 4. **Port Stage 3-1 vacancy** — done (`vacancy.py`, `vacancy_driver.py`, shared `lammps_cell.py`; mu/masses from Family)
-5. Port Stage 3-2 SIA anneal only (no classification)
+5. **Port Stage 3-2 SIA** — done: anneal + Ef + **element-pair only** (`sia_pair.py`); no geometry/orientation; `sia_pairs_<T>K.csv`
 6. Streamlit GUI: family → stages → emit/run pack
 7. End-to-end dry run on reduced supercell before 5488 defaults
 
