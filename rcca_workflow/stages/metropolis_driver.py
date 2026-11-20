@@ -1,32 +1,8 @@
 """
-Canonical Metropolis swaps for equiatomic W-Ta-Cr-V at room temperature.
+Parameterized Metropolis aging driver (ported from ex_scripts/Step2_MetroMC).
 
-5488-atom branch (14×14×14 conventional bcc). The 128-atom run lives in
-../MC_Metropolis_128/.
-
-Pipeline
-1. Read the SQS POSCAR (default: local poscar_out.vasp, else ../../SQS/_5488/).
-2. Relax the cell once with tabGAP (writes relaxed.data).
-3. Freeze coordinates and run binary fix atom/swap at 300 K, cycling all
-   element pairs. Progress every LOG_EVERY swap attempts goes to the driver
-   log and updates mc_progress.png (no separate .dat). One "round" is
-   N = n_atoms attempts. After >= MIN_ROUNDS, stop when |Δ(pe/N)| stays
-   below ~1 meV/atom over several rounds and frac_interval is steady;
-   write aged.data. Do not wait for a fixed attempts-per-atom budget.
-
-MPI: default 4 ranks. Do not use 16 — the ghost layer is too thick for this
-cell. Use BENCH=1 to time ~1000 steps at 1, 4, and 8 ranks and pick the
-fastest time/step.
-
-Optional environment variables:
-    POT_DIR, POSCAR, LMP, MPIRUN, NPROCS, SEED
-    BENCH=1          rank timing only (1/4/8), then exit
-    SKIP_RELAX=1     reuse existing relaxed.data
-    LOG_EVERY        progress row spacing (default 1000)
-    MIN_ROUNDS       default 10
-    STABLE_ROUNDS    consecutive quiet rounds needed (default 3)
-    MAX_ROUNDS       safety cap (default 200)
-    PE_TOL_MEV       |Δ(pe/N)| threshold in meV/atom (default 1.0)
+Pipeline: SQS POSCAR → box relax → frozen-coordinate binary fix atom/swap at T
+→ stop on PE/atom + round-mean frac_interval stability → aged.data.
 """
 
 from __future__ import annotations
@@ -36,55 +12,52 @@ import os
 import re
 import shutil
 import subprocess
-import sys
 import time
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Mapping, Optional
 
-TEMPERATURE_K = 300.0
-TARGET_NATOMS = 5488
+
 DEFAULT_SEED = 12345
 DEFAULT_NPROCS = 4
 FORBIDDEN_NPROCS = {16}
-BENCH_RANKS = (1, 4, 8) # if BENCH = 1 it will compare, else it doesn't move
+BENCH_RANKS = (1, 4, 8)
 BENCH_STEPS = 1000
 
 LOG_EVERY_DEFAULT = 1000
 MIN_ROUNDS_DEFAULT = 10
 STABLE_ROUNDS_DEFAULT = 3
 MAX_ROUNDS_DEFAULT = 200
-PE_TOL_MEV_DEFAULT = 1.0  # meV/atom
-# Round-averaged frac_interval is "steady" if |Δ mean_frac| between successive
-# rounds stays below this absolute tolerance. Do NOT use per-chunk rel_std:
-# binary pair cycling makes frac_interval jump 0 ↔ ~0.1 every 1000 steps even
-# when the alloy is equilibrated. Cumulative accept/attempt is not a stop signal.
+PE_TOL_MEV_DEFAULT = 1.0
 FRAC_ROUND_DELTA_MAX = 0.05
-
-MASSES = {"Cr": 51.9961, "Ta": 180.94788, "V": 50.9415, "W": 183.84}
-
-HERE = Path(__file__).resolve().parent
-ALLOY_ROOT = HERE.parents[1]
-DEFAULT_POT_DIR = Path.home() / "HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V"
-PLOT_PATH = HERE / "mc_progress.png"
+DEFAULT_TEMPERATURE_K = 300.0
 
 
-def default_poscar() -> Path:
-    local = HERE / "poscar_out.vasp"
-    if local.is_file():
-        return local
-    sqs = ALLOY_ROOT / "SQS" / "_5488"
-    for name in ("poscar_out.vasp", "poscar_out", "poscar_out_interrupt"):
-        path = sqs / name
-        if path.is_file():
-            return path
-    return local
+@dataclass(frozen=True)
+class MetroRunConfig:
+    """Controls for one Metropolis aging job directory."""
 
-
-DEFAULT_POSCAR = default_poscar()
+    poscar: Path
+    pot_dir: Path
+    masses: Mapping[str, float]
+    temperature_k: float = DEFAULT_TEMPERATURE_K
+    expected_natoms: Optional[int] = 5488
+    lmp: str = "lmp"
+    mpirun: str = "mpirun"
+    nprocs: int = DEFAULT_NPROCS
+    seed: int = DEFAULT_SEED
+    log_every: int = LOG_EVERY_DEFAULT
+    min_rounds: int = MIN_ROUNDS_DEFAULT
+    stable_rounds: int = STABLE_ROUNDS_DEFAULT
+    max_rounds: int = MAX_ROUNDS_DEFAULT
+    pe_tol_mev: float = PE_TOL_MEV_DEFAULT
+    skip_relax: bool = False
+    bench: bool = False
+    family_name: str = ""
 
 
 def die(message: str) -> None:
-    print(f"ERROR: {message}", file=sys.stderr)
-    raise SystemExit(1)
+    raise SystemExit(f"ERROR: {message}")
 
 
 def env_int(name: str, default: int, *, lo: int = 1, hi: int = 10_000_000) -> int:
@@ -116,8 +89,8 @@ def env_flag(name: str) -> bool:
     raw = os.environ.get(name, "").strip().lower()
     return raw in {"1", "true", "yes", "y", "on"}
 
-# parsing the poscar file
-def read_poscar(path: Path):
+
+def read_poscar(path: Path, masses: Mapping[str, float]):
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
     if len(lines) < 8:
         die(f"{path} is not a POSCAR")
@@ -146,8 +119,8 @@ def read_poscar(path: Path):
     positions = []
     species = []
     for symbol, count in zip(symbols, counts):
-        if symbol not in MASSES:
-            die(f"unexpected element {symbol}")
+        if symbol not in masses:
+            die(f"unexpected element {symbol} (family masses: {sorted(masses)})")
         species.extend([symbol] * count)
     for symbol, line in zip(species, coord_lines):
         frac_or_cart = [float(x) for x in line.split()[:3]]
@@ -156,12 +129,17 @@ def read_poscar(path: Path):
             y = sum(frac_or_cart[k] * cell[k][1] for k in range(3))
             z = sum(frac_or_cart[k] * cell[k][2] for k in range(3))
         else:
+            # VASP Cartesian lines are already scaled by the scale factor on line 2
+            # in many writers; match ex_scripts which multiplies by scale again for
+            # Cartesian mode. Prefer matching the example script exactly.
             x, y, z = (scale * v for v in frac_or_cart)
         positions.append((symbol, x, y, z))
     return cell, positions
 
-# Writing the lammps data file with POSCAR read results
-def write_lammps_data(path: Path, cell, positions) -> list[str]:
+
+def write_lammps_data(
+    path: Path, cell, positions, masses: Mapping[str, float], *, title: str
+) -> list[str]:
     order = []
     for symbol, _, _, _ in positions:
         if symbol not in order:
@@ -172,7 +150,7 @@ def write_lammps_data(path: Path, cell, positions) -> list[str]:
     xz = cell[2][0]
     yz = cell[2][1]
     lines = [
-        "W-Ta-Cr-V SQS, types follow the POSCAR species order",
+        title,
         "",
         f"{len(positions)} atoms",
         f"{len(order)} atom types",
@@ -185,9 +163,8 @@ def write_lammps_data(path: Path, cell, positions) -> list[str]:
         "Masses",
         "",
     ]
-
     for symbol in order:
-        lines.append(f"{type_of[symbol]} {MASSES[symbol]}")
+        lines.append(f"{type_of[symbol]} {masses[symbol]}")
     lines += ["", "Atoms # atomic", ""]
     for i, (symbol, x, y, z) in enumerate(positions, start=1):
         lines.append(f"{i} {type_of[symbol]} {x:.10f} {y:.10f} {z:.10f}")
@@ -195,7 +172,7 @@ def write_lammps_data(path: Path, cell, positions) -> list[str]:
     path.write_text("\n".join(lines), encoding="utf-8")
     return order
 
-# the tabGap potential dir on server environment
+
 def find_potential(pot_dir: Path) -> tuple[Path, Path]:
     tabgaps = sorted(pot_dir.glob("*.tabgap"))
     eams = sorted(pot_dir.glob("*.eam.fs"))
@@ -206,7 +183,7 @@ def find_potential(pot_dir: Path) -> tuple[Path, Path]:
         )
     return tabgaps[0], eams[0]
 
-# check if lammps environment can support the run
+
 def lammps_has_atom_swap(lmp: str) -> bool:
     try:
         proc = subprocess.run([lmp, "-help"], check=False, capture_output=True, text=True)
@@ -233,15 +210,17 @@ def build_lammps_cmd(lmp: str, nprocs: int, mpirun: str, in_name: str, log_name:
 def pair_header(elements: list[str], tabgap: Path, eam: Path) -> str:
     elem = " ".join(elements)
     return f"""pair_style      hybrid/overlay tabgap eam/fs
-pair_coeff      * * tabgap {tabgap} {elem}
-pair_coeff      * * eam/fs {eam} {elem}
+pair_coeff      * * tabgap {tabgap.as_posix()} {elem}
+pair_coeff      * * eam/fs {eam.as_posix()} {elem}
 neighbor        2.0 bin
 neigh_modify    delay 0 every 1 check yes
 """
 
-# build lmp input for relaxation
-def write_relax_input(path: Path, *, data_name: str, elements: list[str], tabgap: Path, eam: Path) -> None:
-    text = f"""# Stage 1: relax pure-W SQS volume for W-Ta-Cr-V tabGAP.
+
+def write_relax_input(
+    path: Path, *, data_name: str, elements: list[str], tabgap: Path, eam: Path
+) -> None:
+    text = f"""# Stage 1: relax SQS volume for tabGAP hybrid.
 units           metal
 atom_style      atomic
 boundary        p p p
@@ -270,6 +249,7 @@ def write_swap_chunk_input(
     t2: int,
     n_steps: int,
     seed: int,
+    temperature_k: float,
     out_data: str,
 ) -> None:
     text = f"""# Frozen-coordinate binary atom/swap chunk ({n_steps} attempts).
@@ -283,9 +263,9 @@ velocity        all set 0.0 0.0 0.0
 fix             freeze all setforce 0.0 0.0 0.0
 fix             integrate all nve
 timestep        1.0
-thermo          {max(n_steps, 1)} 
+thermo          {max(n_steps, 1)}
 thermo_style    custom step pe
-fix             mc all atom/swap 1 1 {seed} {TEMPERATURE_K} ke no types {t1} {t2}
+fix             mc all atom/swap 1 1 {seed} {temperature_k} ke no types {t1} {t2}
 run             {n_steps}
 print           "MC_CHUNK pe=$(pe) att=$(f_mc[1]) suc=$(f_mc[2])"
 unfix           mc
@@ -293,14 +273,11 @@ write_data      {out_data}
 """
     path.write_text(text, encoding="utf-8")
 
-# logging info stored through parsing mc_chunk
+
 def parse_mc_chunk(log_text: str) -> tuple[float, int, int]:
-    """Parse the evaluated MC_CHUNK print line (skip the echoed input command)."""
     pe = None
     att = None
     suc = None
-    # Match only evaluated output, e.g.  MC_CHUNK pe=-59230.43 att=1000 suc=17
-    # Ignore echoed input: print "MC_CHUNK pe=$(pe) ..."
     chunk_pat = re.compile(
         r"^\s*MC_CHUNK\s+pe=([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)"
         r"\s+att=([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)"
@@ -316,21 +293,20 @@ def parse_mc_chunk(log_text: str) -> tuple[float, int, int]:
         pe = float(m.group(1))
         att = int(float(m.group(2)))
         suc = int(float(m.group(3)))
-    if pe is None or att is None or suc is None: # no return energy means lmp dies
+    if pe is None or att is None or suc is None:
         die("LAMMPS log missing evaluated MC_CHUNK pe/att/suc line")
     return pe, att, suc
 
 
-def run_cmd(cmd: list[str], *, log_path: Path) -> str:
-    proc = subprocess.run(cmd, cwd=HERE)
+def run_cmd(cmd: list[str], *, work_dir: Path, log_path: Path) -> str:
+    proc = subprocess.run(cmd, cwd=str(work_dir))
     text = log_path.read_text(encoding="utf-8", errors="replace") if log_path.is_file() else ""
     if proc.returncode != 0:
         die(f"LAMMPS exited {proc.returncode}. See {log_path}")
     return text
 
-# matplotlib driver here
-def plot_progress(progress_rows: list[dict], out_png: Path) -> None:
-    """Write mc_progress.png from in-memory rows (driver log already has the text)."""
+
+def plot_progress(progress_rows: list[dict], out_png: Path, *, title: str) -> None:
     if len(progress_rows) < 2:
         return
     try:
@@ -347,7 +323,7 @@ def plot_progress(progress_rows: list[dict], out_png: Path) -> None:
     fig, (ax0, ax1) = plt.subplots(2, 1, figsize=(7.5, 6.0), sharex=True)
     ax0.plot(steps, pe_n, color="#1f4e79", lw=1.4)
     ax0.set_ylabel("pe / atom (eV)")
-    ax0.set_title("Metropolis MC progress (W-Ta-Cr-V, 5488 atoms)")
+    ax0.set_title(title)
     ax0.grid(True, alpha=0.3)
     ax1.plot(steps, frac, color="#b85c38", lw=1.4)
     ax1.set_xlabel("swap attempts")
@@ -357,15 +333,8 @@ def plot_progress(progress_rows: list[dict], out_png: Path) -> None:
     fig.savefig(out_png, dpi=140)
     plt.close(fig)
 
-# printing logging info per round
-def round_end_metrics(progress_rows: list[dict], n_atoms: int) -> list[dict]:
-    """
-    One entry per finished round k >= 1.
 
-    Round k is the attempts in [k*N, (k+1)*N). The entry keeps the last logged
-    sample inside that window, the same rows _round_mean_frac averages. The
-    round counts as finished only after a later sample has crossed (k+1)*N.
-    """
+def round_end_metrics(progress_rows: list[dict], n_atoms: int) -> list[dict]:
     if n_atoms < 1 or not progress_rows:
         return []
     last_attempt = progress_rows[-1]["n_attempt"]
@@ -406,7 +375,7 @@ def _round_mean_frac(progress_rows: list[dict], round_id: int) -> float | None:
         return None
     return sum(vals) / len(vals)
 
-# condition for converging
+
 def converged(
     progress_rows: list[dict],
     *,
@@ -425,11 +394,10 @@ def converged(
     max_dpe = 0.0
     for a, b in zip(window, window[1:]):
         dpe = abs(b["pe_per_atom"] - a["pe_per_atom"])
-        max_dpe = max(max_dpe, dpe) # change in pe > pe_tol_ev
+        max_dpe = max(max_dpe, dpe)
         if dpe > pe_tol_ev:
             pe_ok = False
 
-    # Steady frac_interval: compare round-averaged values, not raw 1000-step chunks.
     round_fracs: list[float] = []
     for end in window:
         mean_f = _round_mean_frac(progress_rows, end["round"])
@@ -459,17 +427,22 @@ def converged(
 
 def check_nprocs(nprocs: int) -> None:
     if nprocs in FORBIDDEN_NPROCS:
-        die(f"NPROCS={nprocs} is forbidden for this 5488-atom cell (ghost layer too thick)")
+        die(
+            f"NPROCS={nprocs} is forbidden for this cell "
+            f"(ghost layer too thick; forbidden={sorted(FORBIDDEN_NPROCS)})"
+        )
 
-# used for comparison, skipped
+
 def bench_ranks(
     *,
+    work_dir: Path,
     lmp: str,
     mpirun: str,
     elements: list[str],
     tabgap: Path,
     eam: Path,
     seed: int,
+    temperature_k: float,
 ) -> int:
     pairs = binary_type_pairs(len(elements))
     t1, t2 = pairs[0]
@@ -480,7 +453,7 @@ def bench_ranks(
         log_name = f"log.bench_{nprocs}.lammps"
         out_data = f"bench_{nprocs}.data"
         write_swap_chunk_input(
-            HERE / in_name,
+            work_dir / in_name,
             data_name="relaxed.data",
             elements=elements,
             tabgap=tabgap,
@@ -489,12 +462,13 @@ def bench_ranks(
             t2=t2,
             n_steps=BENCH_STEPS,
             seed=seed + nprocs,
+            temperature_k=temperature_k,
             out_data=out_data,
         )
         cmd = build_lammps_cmd(lmp, nprocs, mpirun, in_name, log_name)
         print(f"BENCH nprocs={nprocs} steps={BENCH_STEPS} cmd={' '.join(cmd)}", flush=True)
         t0 = time.perf_counter()
-        run_cmd(cmd, log_path=HERE / log_name)
+        run_cmd(cmd, work_dir=work_dir, log_path=work_dir / log_name)
         dt = time.perf_counter() - t0
         tps = dt / BENCH_STEPS
         results.append((nprocs, dt, tps))
@@ -505,27 +479,34 @@ def bench_ranks(
     for nprocs, dt, tps in results:
         mark = " <-- selected" if nprocs == best else ""
         print(f"  ranks={nprocs} wall={dt:.3f}s s/step={tps:.6f}{mark}", flush=True)
-    (HERE / "bench_ranks.txt").write_text(
+    (work_dir / "bench_ranks.txt").write_text(
         "\n".join(f"{n} {dt:.6f} {tps:.8f}" for n, dt, tps in results) + f"\nbest {best}\n",
         encoding="utf-8",
     )
     return best
 
 
-def main() -> None:
-    poscar = Path(os.environ.get("POSCAR", str(DEFAULT_POSCAR))).expanduser()
-    pot_dir = Path(os.environ.get("POT_DIR", str(DEFAULT_POT_DIR))).expanduser()
-    lmp = os.environ.get("LMP", "lmp")
-    mpirun = os.environ.get("MPIRUN", "mpirun")
-    seed = env_int("SEED", DEFAULT_SEED)
-    nprocs = env_int("NPROCS", DEFAULT_NPROCS, lo=1, hi=8)
-    log_every = env_int("LOG_EVERY", LOG_EVERY_DEFAULT)
-    min_rounds = env_int("MIN_ROUNDS", MIN_ROUNDS_DEFAULT)
-    stable_rounds = env_int("STABLE_ROUNDS", STABLE_ROUNDS_DEFAULT)
-    max_rounds = env_int("MAX_ROUNDS", MAX_ROUNDS_DEFAULT)
-    pe_tol_ev = env_float("PE_TOL_MEV", PE_TOL_MEV_DEFAULT) / 1000.0
-    do_bench = env_flag("BENCH")
-    skip_relax = env_flag("SKIP_RELAX")
+def run_metropolis(work_dir: Path, cfg: MetroRunConfig) -> dict[str, object]:
+    """Run Metropolis aging into ``work_dir``; writes relaxed.data + aged.data."""
+    root = Path(work_dir).resolve()
+    root.mkdir(parents=True, exist_ok=True)
+
+    poscar = Path(cfg.poscar).expanduser().resolve()
+    pot_dir = Path(cfg.pot_dir).expanduser().resolve()
+    lmp = cfg.lmp
+    mpirun = cfg.mpirun
+    seed = env_int("SEED", cfg.seed)
+    nprocs = env_int("NPROCS", cfg.nprocs, lo=1, hi=8)
+    log_every = env_int("LOG_EVERY", cfg.log_every)
+    min_rounds = env_int("MIN_ROUNDS", cfg.min_rounds)
+    stable_rounds = env_int("STABLE_ROUNDS", cfg.stable_rounds)
+    max_rounds = env_int("MAX_ROUNDS", cfg.max_rounds)
+    pe_tol_ev = env_float("PE_TOL_MEV", cfg.pe_tol_mev) / 1000.0
+    temperature_k = float(cfg.temperature_k)
+    do_bench = cfg.bench or env_flag("BENCH")
+    skip_relax = cfg.skip_relax or env_flag("SKIP_RELAX")
+    masses = {str(k): float(v) for k, v in dict(cfg.masses).items()}
+    plot_path = root / "mc_progress.png"
 
     check_nprocs(nprocs)
     if not poscar.is_file():
@@ -536,17 +517,24 @@ def main() -> None:
     tabgap = tabgap.resolve()
     eam = eam.resolve()
 
-    cell, positions = read_poscar(poscar)
+    # Prefer a local copy so pack folders are self-contained.
+    local_poscar = root / "poscar_in"
+    if poscar.resolve() != local_poscar.resolve():
+        shutil.copy2(poscar, local_poscar)
+
+    cell, positions = read_poscar(local_poscar if local_poscar.is_file() else poscar, masses)
     n_atoms = len(positions)
-    if n_atoms != TARGET_NATOMS:
-        die(f"POSCAR has {n_atoms} atoms, expected {TARGET_NATOMS}")
-    elements = write_lammps_data(HERE / "start.data", cell, positions)
+    if cfg.expected_natoms is not None and n_atoms != int(cfg.expected_natoms):
+        die(f"POSCAR has {n_atoms} atoms, expected {cfg.expected_natoms}")
+
+    title = f"{cfg.family_name or 'alloy'} SQS, types follow the POSCAR species order"
+    elements = write_lammps_data(root / "start.data", cell, positions, masses, title=title)
     pairs = binary_type_pairs(len(elements))
     if not pairs:
         die("need at least two element types")
 
     print(
-        f"Room temperature {TEMPERATURE_K:.0f} K | N={n_atoms} | "
+        f"Room temperature {temperature_k:.0f} K | N={n_atoms} | "
         f"log_every={log_every} | round=N attempts | "
         f"min_rounds={min_rounds} stable_rounds={stable_rounds} "
         f"pe_tol={pe_tol_ev * 1000:.2f} meV/atom",
@@ -556,9 +544,9 @@ def main() -> None:
     print(f"tabgap: {tabgap}", flush=True)
     print(f"eam   : {eam}", flush=True)
 
-    if not skip_relax or not (HERE / "relaxed.data").is_file():
+    if not skip_relax or not (root / "relaxed.data").is_file():
         write_relax_input(
-            HERE / "in.relax.lmp",
+            root / "in.relax.lmp",
             data_name="start.data",
             elements=elements,
             tabgap=tabgap,
@@ -566,27 +554,28 @@ def main() -> None:
         )
         cmd = build_lammps_cmd(lmp, nprocs, mpirun, "in.relax.lmp", "log.relax.lammps")
         print(f"relax: {' '.join(cmd)}", flush=True)
-        run_cmd(cmd, log_path=HERE / "log.relax.lammps")
-        if not (HERE / "relaxed.data").is_file():
+        run_cmd(cmd, work_dir=root, log_path=root / "log.relax.lammps")
+        if not (root / "relaxed.data").is_file():
             die("relax finished without relaxed.data")
     else:
         print("SKIP_RELAX=1 — reusing relaxed.data", flush=True)
 
     if do_bench:
         best = bench_ranks(
+            work_dir=root,
             lmp=lmp,
             mpirun=mpirun,
             elements=elements,
             tabgap=tabgap,
             eam=eam,
             seed=seed,
+            temperature_k=temperature_k,
         )
         print(f"BENCH done. Recommended NPROCS={best}", flush=True)
-        return
+        return {"status": "bench", "recommended_nprocs": best, "n_atoms": n_atoms}
 
-    # Production MC: chunked swaps with live progress + early stop.
-    current = HERE / "mc_current.data"
-    shutil.copyfile(HERE / "relaxed.data", current)
+    current = root / "mc_current.data"
+    shutil.copyfile(root / "relaxed.data", current)
 
     cum_att = 0
     cum_suc = 0
@@ -596,6 +585,7 @@ def main() -> None:
     pair_idx = 0
     chunk_i = 0
     max_attempts = max_rounds * n_atoms
+    stop_reason = f"MAX_ROUNDS={max_rounds}"
 
     print(
         f"MC start with NPROCS={nprocs} (forbidden ranks: {sorted(FORBIDDEN_NPROCS)}). "
@@ -603,7 +593,6 @@ def main() -> None:
         flush=True,
     )
 
-    # logging data
     while cum_att < max_attempts:
         remaining_to_log = log_every - (cum_att % log_every)
         if remaining_to_log <= 0:
@@ -616,7 +605,7 @@ def main() -> None:
         in_name = "in.swap_chunk.lmp"
         log_name = "log.swap_chunk.lammps"
         write_swap_chunk_input(
-            HERE / in_name,
+            root / in_name,
             data_name=current.name,
             elements=elements,
             tabgap=tabgap,
@@ -625,6 +614,7 @@ def main() -> None:
             t2=t2,
             n_steps=n_steps,
             seed=seed + chunk_i,
+            temperature_k=temperature_k,
             out_data=current.name,
         )
         cmd = build_lammps_cmd(lmp, nprocs, mpirun, in_name, log_name)
@@ -633,12 +623,11 @@ def main() -> None:
             f"n_steps={n_steps} cum_att={cum_att} -> {cum_att + n_steps}",
             flush=True,
         )
-        log_text = run_cmd(cmd, log_path=HERE / log_name)
+        log_text = run_cmd(cmd, work_dir=root, log_path=root / log_name)
         pe, att, suc = parse_mc_chunk(log_text)
         cum_att += att
         cum_suc += suc
 
-        # Emit a progress row whenever we hit a log_every boundary (or the end).
         if cum_att % log_every == 0 or cum_att >= max_attempts:
             d_att = cum_att - prev_att
             d_suc = cum_suc - prev_suc
@@ -663,7 +652,11 @@ def main() -> None:
                 f"round={round_id}",
                 flush=True,
             )
-            plot_progress(progress_rows, PLOT_PATH)
+            plot_progress(
+                progress_rows,
+                plot_path,
+                title=f"Metropolis MC progress ({cfg.family_name or 'alloy'}, {n_atoms} atoms)",
+            )
 
             ok, reason = converged(
                 progress_rows,
@@ -673,18 +666,62 @@ def main() -> None:
                 pe_tol_ev=pe_tol_ev,
             )
             if ok:
-                shutil.copyfile(current, HERE / "aged.data")
+                shutil.copyfile(current, root / "aged.data")
+                stop_reason = reason
                 print(f"CONVERGED after {round_id} rounds: {reason}", flush=True)
-                print(f"Wrote {HERE / 'aged.data'}", flush=True)
-                print(f"Plot: {PLOT_PATH}", flush=True)
-                return
+                print(f"Wrote {root / 'aged.data'}", flush=True)
+                print(f"Plot: {plot_path}", flush=True)
+                return {
+                    "status": "converged",
+                    "n_atoms": n_atoms,
+                    "rounds": round_id,
+                    "stop_reason": stop_reason,
+                    "aged": str(root / "aged.data"),
+                    "relaxed": str(root / "relaxed.data"),
+                    "elements": elements,
+                }
 
-    shutil.copyfile(current, HERE / "aged.data")
+    shutil.copyfile(current, root / "aged.data")
     print(
         f"Reached MAX_ROUNDS={max_rounds} without formal convergence; wrote aged.data anyway.",
         flush=True,
     )
-    plot_progress(progress_rows, PLOT_PATH)
+    plot_progress(
+        progress_rows,
+        plot_path,
+        title=f"Metropolis MC progress ({cfg.family_name or 'alloy'}, {n_atoms} atoms)",
+    )
+    return {
+        "status": "max_rounds",
+        "n_atoms": n_atoms,
+        "rounds": max_rounds,
+        "stop_reason": stop_reason,
+        "aged": str(root / "aged.data"),
+        "relaxed": str(root / "relaxed.data"),
+        "elements": elements,
+    }
+
+
+def main() -> None:
+    """CLI: POSCAR/POT_DIR from env; masses default to W–Ta–Cr–V demo."""
+    from ..family import DEFAULT_WTACRV
+
+    work = Path(os.environ.get("METRO_WORK_DIR", ".")).resolve()
+    poscar = Path(os.environ.get("POSCAR", str(work / "poscar_out"))).expanduser()
+    pot_dir = Path(
+        os.environ.get(
+            "POT_DIR",
+            str(Path.home() / "HEA_Irr_ML_study/ML_potentials/tabGAP/W-Ta-Cr-V"),
+        )
+    ).expanduser()
+    cfg = MetroRunConfig(
+        poscar=poscar,
+        pot_dir=pot_dir,
+        masses=DEFAULT_WTACRV.masses,
+        family_name=DEFAULT_WTACRV.name,
+        expected_natoms=env_int("TARGET_NATOMS", 5488, lo=2, hi=10_000_000),
+    )
+    run_metropolis(work, cfg)
 
 
 if __name__ == "__main__":

@@ -54,7 +54,7 @@ Each stage writes `manifest.json` (inputs, outputs, seeds, potential hash, compo
 
 1. **Package skeleton** — done
 2. **Port Stage 1 SQS** — done (`stages/sqs.py`, `stages/sqs_driver.py`, golden shape tests)
-3. Port Stage 2 Metropolis; chain from Stage 1 POSCAR
+3. **Port Stage 2 Metropolis** — done (`stages/metropolis.py`, `metropolis_driver.py`, chain from Stage-1 POSCAR)
 4. Port Stage 3-1 vacancy (`mu`/masses from family)
 5. Port Stage 3-2 SIA anneal only (no classification)
 6. Streamlit GUI: family → stages → emit/run pack

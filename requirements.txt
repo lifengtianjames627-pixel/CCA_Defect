@@ -2,6 +2,7 @@
 numpy>=1.26
 ase>=3.22
 icet>=3.0
+matplotlib>=3.7
 
 # GUI (step 6)
 streamlit>=1.30
