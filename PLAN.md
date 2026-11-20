@@ -7,7 +7,7 @@ Canonical plan file: [`.cursor/plans/rcca-workflow.plan.md`](.cursor/plans/rcca-
 ## Todos
 
 - [x] Create `rcca_workflow` package skeleton: Family, Potential, Manifest, stage interfaces
-- [ ] Parameterize and port Stage 1 SQS from `ex_scripts/Step1_SQS`
+- [x] Parameterize and port Stage 1 SQS from `ex_scripts/Step1_SQS`
 - [ ] Port Stage 2 Metropolis aging; chain from Stage 1 POSCAR
 - [ ] Port Stage 3-1 vacancy formation with family mu/masses
 - [ ] Port Stage 3-2 SIA anneal only; strip all classification logic and class CSV/fields
@@ -140,7 +140,7 @@ Reuse ideas from `legacy_icet_sqs/` only where useful (structure upload, downloa
 ## Implementation order
 
 1. ~~Package skeleton + `Family` / `Potential` / `Manifest` models matching example env vars.~~ **done**
-2. Port Stage 1 driver as parameterized module; golden-check against `ex_scripts/Step1_SQS` outputs shape.
+2. ~~Port Stage 1 driver as parameterized module; golden-check against `ex_scripts/Step1_SQS` outputs shape.~~ **done** (`rcca_workflow/stages/sqs.py` + `sqs_driver.py`; `tests/test_sqs_stage.py`)
 3. Port Stage 2; chain from Stage 1 POSCAR.
 4. Port Stage 3-1 vacancy.
 5. Port Stage 3-2 SIA **with Part 3 deleted**; energy CSV schema without class fields.

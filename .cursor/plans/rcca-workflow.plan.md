@@ -52,8 +52,8 @@ Each stage writes `manifest.json` (inputs, outputs, seeds, potential hash, compo
 
 ## Implementation order
 
-1. **Package skeleton** — `Family` / `Potential` / `Manifest` + stage interfaces matching example env vars
-2. Port Stage 1 SQS (parameterized chemistry); golden-check output shape vs `ex_scripts/Step1_SQS`
+1. **Package skeleton** — done
+2. **Port Stage 1 SQS** — done (`stages/sqs.py`, `stages/sqs_driver.py`, golden shape tests)
 3. Port Stage 2 Metropolis; chain from Stage 1 POSCAR
 4. Port Stage 3-1 vacancy (`mu`/masses from family)
 5. Port Stage 3-2 SIA anneal only (no classification)
