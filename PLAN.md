@@ -9,7 +9,7 @@ Canonical plan file: [`.cursor/plans/rcca-workflow.plan.md`](.cursor/plans/rcca-
 - [x] Create `rcca_workflow` package skeleton: Family, Potential, Manifest, stage interfaces
 - [x] Parameterize and port Stage 1 SQS from `ex_scripts/Step1_SQS`
 - [x] Port Stage 2 Metropolis aging; chain from Stage 1 POSCAR
-- [ ] Port Stage 3-1 vacancy formation with family mu/masses
+- [x] Port Stage 3-1 vacancy formation with family mu/masses
 - [ ] Port Stage 3-2 SIA anneal only; strip all classification logic and class CSV/fields
 - [ ] Build Streamlit GUI to configure family/stages and emit chained job packs
 - [ ] Validate end-to-end on a reduced supercell before 5488 defaults
@@ -142,7 +142,7 @@ Reuse ideas from `legacy_icet_sqs/` only where useful (structure upload, downloa
 1. ~~Package skeleton + `Family` / `Potential` / `Manifest` models matching example env vars.~~ **done**
 2. ~~Port Stage 1 driver as parameterized module; golden-check against `ex_scripts/Step1_SQS` outputs shape.~~ **done** (`rcca_workflow/stages/sqs.py` + `sqs_driver.py`; `tests/test_sqs_stage.py`)
 3. ~~Port Stage 2; chain from Stage 1 POSCAR.~~ **done** (`metropolis.py` + `metropolis_driver.py`; `tests/test_metropolis_stage.py`)
-4. Port Stage 3-1 vacancy.
+4. ~~Port Stage 3-1 vacancy.~~ **done** (`vacancy.py` + `vacancy_driver.py` + shared `lammps_cell.py`; `tests/test_vacancy_stage.py`)
 5. Port Stage 3-2 SIA **with Part 3 deleted**; energy CSV schema without class fields.
 6. Streamlit GUI that fills configs and writes a runnable pack directory.
 7. One end-to-end dry run on a small supercell (e.g. reduced `SUPERCELL_REP`) to validate chaining before 5488-scale defaults.

@@ -1,0 +1,31 @@
+---
+description: Delete __pycache__ and .pyc files the agent creates; never leave them in the workspace
+alwaysApply: true
+---
+
+# No leftover `__pycache__`
+
+Running or importing Python creates `__pycache__/` and `*.pyc`. Git already ignores them. The agent still removes them before finishing the turn.
+
+## When to clean
+
+After any command that can compile Python: `python`, `python -m`, `pytest`, `pip install -e .`, imports, or scripts. Also after writing `.py` files if a run produced bytecode.
+
+Clean before the final reply, including when the task failed partway through.
+
+## How to clean
+
+From the workspace root, delete every `__pycache__` directory and stray bytecode. On Windows PowerShell:
+
+```powershell
+Get-ChildItem -Recurse -Force -Directory -Filter __pycache__ | Remove-Item -Recurse -Force
+Get-ChildItem -Recurse -Force -Include *.pyc,*.pyo -File | Remove-Item -Force
+```
+
+Skip virtualenvs (`.venv`, `venv`, `sqs_env`) and do not delete those trees.
+
+## Do not
+
+- Commit `__pycache__`, `*.pyc`, or `*.pyo`
+- Leave a cache directory because a later step might reuse it
+- Add `__pycache__` exceptions to `.gitignore` beyond the existing `__pycache__/` and `*.py[cod]` lines
