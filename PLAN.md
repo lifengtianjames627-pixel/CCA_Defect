@@ -11,7 +11,7 @@ Canonical plan file: [`.cursor/plans/rcca-workflow.plan.md`](.cursor/plans/rcca-
 - [x] Port Stage 2 Metropolis aging; chain from Stage 1 POSCAR
 - [x] Port Stage 3-1 vacancy formation with family mu/masses
 - [x] Port Stage 3-2 SIA anneal + **element-pair** chemistry only (no geometry/orientation classifier)
-- [ ] Build Streamlit GUI to configure family/stages and emit chained job packs
+- [x] Build Streamlit GUI to configure family/stages and emit chained job packs
 - [ ] Validate end-to-end on a reduced supercell before 5488 defaults
 
 ## Repo layout
@@ -145,5 +145,5 @@ Reuse ideas from `legacy_icet_sqs/` only where useful (structure upload, downloa
 3. ~~Port Stage 2; chain from Stage 1 POSCAR.~~ **done** (`metropolis.py` + `metropolis_driver.py`; `tests/test_metropolis_stage.py`)
 4. ~~Port Stage 3-1 vacancy.~~ **done** (`vacancy.py` + `vacancy_driver.py` + shared `lammps_cell.py`; `tests/test_vacancy_stage.py`)
 5. ~~Port Stage 3-2 SIA.~~ **done** — anneal + Ef; **element-pair** via WS occupancy (`sia_pair.py`); **no** oct / ⟨110⟩ / ⟨111⟩ / ⟨221⟩; summary is `sia_pairs_<T>K.csv` (not `sia_classes_*`).
-6. Streamlit GUI that fills configs and writes a runnable pack directory.
+6. ~~Streamlit GUI.~~ **done** (`gui/app.py` + `rcca_workflow/pack.py`; emit chained pack + zip)
 7. One end-to-end dry run on a small supercell (e.g. reduced `SUPERCELL_REP`) to validate chaining before 5488-scale defaults.

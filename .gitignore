@@ -8,6 +8,8 @@ sqs_env/
 .mypy_cache/
 dist/
 build/
+packs/
+*.zip
 *.data
 *.lammps
 log.lammps

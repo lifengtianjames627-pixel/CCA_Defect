@@ -1,3 +1,10 @@
+---
+name: ""
+overview: ""
+todos: []
+isProject: false
+---
+
 # RCCA Workflow Package
 
 Independent Python package + Streamlit GUI that turns `ex_scripts` (SQS → Metropolis aging → vacancy/SIA formation) into a click-configured, chained local job pack—**without** SIA geometry classification.
@@ -30,6 +37,13 @@ Migration / OKMC = Phase 2 (not in v1).
 ## Data flow
 
 ```mermaid
+lved
+Stage1_SQS
+Stage2_Metropolis
+Stage3_Vacancy
+Stage3_SIA
+Vacancy_Ef_distribution
+SIA_Ef_distribution
 flowchart LR
   Family[Family_and_composition]
   Pot[Potential_resolved]
@@ -57,7 +71,7 @@ Each stage writes `manifest.json` (inputs, outputs, seeds, potential hash, compo
 3. **Port Stage 2 Metropolis** — done (`stages/metropolis.py`, `metropolis_driver.py`, chain from Stage-1 POSCAR)
 4. **Port Stage 3-1 vacancy** — done (`vacancy.py`, `vacancy_driver.py`, shared `lammps_cell.py`; mu/masses from Family)
 5. **Port Stage 3-2 SIA** — done: anneal + Ef + **element-pair only** (`sia_pair.py`); no geometry/orientation; `sia_pairs_<T>K.csv`
-6. Streamlit GUI: family → stages → emit/run pack
+6. **Streamlit GUI** — done (`gui/app.py`, `rcca_workflow/pack.py`)
 7. End-to-end dry run on reduced supercell before 5488 defaults
 
 ## Target package layout
